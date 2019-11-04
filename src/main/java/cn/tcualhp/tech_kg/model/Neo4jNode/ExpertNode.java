@@ -56,4 +56,15 @@ public class ExpertNode {
         }
         paperNodes.add(paperNode);
     }
+
+    @Override
+    public String toString() {
+        return "ExpertNode{" +
+                "nodeId=" + nodeId +
+                ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", paperNodes=" + "DO NOT PRINT" +
+                ", unitNodes=" + "DO NOT PRINT" +
+                '}';
+    }
 }

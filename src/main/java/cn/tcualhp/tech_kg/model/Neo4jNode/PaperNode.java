@@ -24,8 +24,32 @@ public class PaperNode {
     @GeneratedValue
     private long nodeId;
 
+    /**
+     * 论文名
+     */
     @Property(name = "name")
     private String name;
+
+    /**
+     * 论文id
+     */
+    @Property(name = "paper_id")
+    private String paperId;
+
+    /**
+     * 论文发表年份
+     */
+    @Property(name = "year")
+    private Integer year;
+
+    /**
+     * 论文概要
+     */
+    @Property(name = "abstract")
+    private String paperAbstract;
+
+    @Property(name = "first_author_code")
+    private String firstAuthorCode;
 
     /**
      * 发表入方向，即作者
@@ -35,6 +59,7 @@ public class PaperNode {
      * @description //TODO
      * @date 14:53 2019/11/4
      **/
+    //防止序列化循环
     @JsonIgnore
     @Relationship(type = "write", direction = Relationship.INCOMING)
     private Set<ExpertNode> expertNodes;
@@ -62,5 +87,18 @@ public class PaperNode {
     @Override
     public int hashCode() {
         return Objects.hash(nodeId, name);
+    }
+
+    @Override
+    public String toString() {
+        return "PaperNode{" +
+                "nodeId=" + nodeId +
+                ", name='" + name + '\'' +
+                ", paperId='" + paperId + '\'' +
+                ", year='" + year + '\'' +
+                ", paperAbstract='" + "DO NOT PRINT" + '\'' +
+                ", firstAuthorCode='" + "DO NOT PRINT" + '\'' +
+                ", expertNodes=" + expertNodes +
+                '}';
     }
 }
