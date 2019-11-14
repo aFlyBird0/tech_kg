@@ -7,7 +7,10 @@ spring:
   data:
     neo4j:
       username: neo4j
-      password: 990424
+      # lhp dev 的密码
+      # password: 990424
+      # dj_dev 的密码
+      password: dev@123456
       uri: http://localhost:7474
 #      uri: http://172.20.10.2:7474
   main:

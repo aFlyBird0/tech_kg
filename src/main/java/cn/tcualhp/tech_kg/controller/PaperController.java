@@ -71,4 +71,24 @@ public class PaperController {
         return new Response().success(paperNodes);
     }
 
+    /**
+     * 通过论文 paper_id 查找论文
+     * @param map
+     * @return
+     * @author dingjianhub
+     * @description //TODO
+     * @date 18:19 2019/11/14
+     **/
+    @PostMapping("/getPapersByPaperId")
+    public Response getPapersByPaperId(@RequestBody Map<String, String> map){
+        String paper_id = map.get("paper_id");
+        if(StringUtils.isEmpty(paper_id)){
+            return new Response().failure(40005, "参数错误, paper_id 不能为空");
+        }
+        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByPaperId(paper_id);
+        return new Response().success(paperNodes);
+    }
+
+
+
 }

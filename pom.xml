@@ -36,13 +36,13 @@
             </exclusions>
         </dependency>
 
-<!--        lombok, 简化javabean-->
+        <!--        lombok, 简化javabean-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
 
-<!--        neo4j-->
+        <!--        neo4j-->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-neo4j</artifactId>
@@ -54,6 +54,13 @@
             <groupId>org.neo4j</groupId>
             <artifactId>neo4j-ogm-http-driver</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <scope>test</scope>
+        </dependency>
+
 
     </dependencies>
 

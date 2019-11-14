@@ -27,8 +27,18 @@ public class PaperNode {
     @Property(name = "name")
     private String name;
 
+    @Property(name = "paper_id")
+    private String paperId;
+
+    @Property(name = "keywords")
+    private String keywords;
+
+    @Property(name = "year")
+    private String year;
+
     /**
      * 发表入方向，即作者
+     *
      * @param null
      * @return
      * @author lihepeng
@@ -39,8 +49,9 @@ public class PaperNode {
     @Relationship(type = "write", direction = Relationship.INCOMING)
     private Set<ExpertNode> expertNodes;
 
-    public void addExpertNodes(ExpertNode expertNode){
-        if (expertNodes == null){
+    public void addExpertNodes(ExpertNode expertNode) {
+        // 如果专家节点为空
+        if (expertNodes == null) {
             expertNodes = new HashSet<>();
         }
         expertNodes.add(expertNode);
