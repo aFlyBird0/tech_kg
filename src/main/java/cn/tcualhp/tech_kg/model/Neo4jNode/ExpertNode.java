@@ -64,4 +64,15 @@ public class ExpertNode {
     public Set<PaperNode> getPaperNodes() {
         return paperNodes;
     }
+  
+    @Override
+    public String toString() {
+        return "ExpertNode{" +
+                "nodeId=" + nodeId +
+                ", name='" + name + '\'' +
+                ", code='" + code + '\'' +
+                ", paperNodes=" + "DO NOT PRINT" +
+                ", unitNodes=" + "DO NOT PRINT" +
+                '}';
+    }
 }

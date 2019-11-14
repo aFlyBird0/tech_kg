@@ -31,6 +31,7 @@ public class UnitNode {
     /**
      * 属于入方向，即拥有
      */
+    //防止序列化循环
     @JsonIgnore
     @Relationship(type = "expert_belong_to_unit", direction = Relationship.INCOMING)
     private Set<ExpertNode> expertNodes;
@@ -40,5 +41,14 @@ public class UnitNode {
             expertNodes = new HashSet<>();
         }
         expertNodes.add(expertNode);
+    }
+
+    @Override
+    public String toString() {
+        return "UnitNode{" +
+                "nodeId=" + nodeId +
+                ", name='" + name + '\'' +
+                ", expertNodes=" + "DO NOT PRINT" +
+                '}';
     }
 }
