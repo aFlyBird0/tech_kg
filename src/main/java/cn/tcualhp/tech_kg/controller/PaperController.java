@@ -34,6 +34,7 @@ public class PaperController {
 
     /**
      * 通过论文名模糊查找论文
+     *
      * @param map
      * @return cn.tcualhp.tech_kg.common.Response
      * @author lihepeng
@@ -41,17 +42,18 @@ public class PaperController {
      * @date 22:16 2019/11/2
      **/
     @PostMapping("/getPapersByPaperName")
-    public Response getPapersByPaperName(@RequestBody Map<String, String> map){
+    public Response getPapersByPaperName(@RequestBody Map<String, String> map) {
         String name = map.get("name");
-        if(StringUtils.isEmpty(name)){
-            return new Response().failure(40003, "参数错误, 论文名不能为空");
+        if (StringUtils.isEmpty(name)) {
+            return new Response().failure(4001, "参数缺失");
         }
-        List<PaperNode> paperNodes = paperNodeRepo.getPapersByNameContains(name);
+        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByNameContains(name);
         return new Response().success(paperNodes);
     }
 
     /**
-     * 通过作者code查找论文，因为作者可能会重名，所以不用作者名字查找
+     * 通过 作者code 查找论文，因为作者可能会重名，所以不用作者名字查找
+     *
      * @param map
      * @return
      * @author lihepeng
@@ -59,16 +61,84 @@ public class PaperController {
      * @date 22:16 2019/11/2
      **/
     @PostMapping("/getPapersByExpertCode")
-    public Response getPapersByExpertCode(@RequestBody Map<String, String> map){
+    public Response getPapersByExpertCode(@RequestBody Map<String, String> map) {
         String code = map.get("code");
-        if(StringUtils.isEmpty(code)){
-            return new Response().failure(40004, "参数错误, 专家code不能为空");
+        if (StringUtils.isEmpty(code)) {
+            return new Response().failure(4001, "参数缺失");
         }
         ExpertNode expertNode = expertNodeRepo.getExpertNodeByCode(code);
-        if (expertNode == null){
+        if (expertNode == null) {
             return new Response().failure("无此专家");
         }
         Set<PaperNode> paperNodes = expertNode.getPaperNodes();
+        return new Response().success(paperNodes);
+    }
+
+    /**
+     * 通过论文 paper_id 查询论文信息
+     *
+     * @param map
+     * @return
+     * @author dingjianhub
+     * @description //TODO
+     * @date 18:19 2019/11/14
+     **/
+    @PostMapping("/getPapersByPaperId")
+    public Response getPapersByPaperId(@RequestBody Map<String, String> map) {
+        String paperId = map.get("paper_id");
+        if (StringUtils.isEmpty(paperId)) {
+            return new Response().failure(4001, "参数缺失");
+        }
+        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByPaperId(paperId);
+        return new Response().success(paperNodes);
+    }
+
+
+    /**
+     * 通过论文 keywords 查询论文信息
+     *
+     * @param map
+     * @return
+     */
+    @PostMapping("/getPapersByKeywords")
+    public Response getPapersByKeywords(@RequestBody Map<String, String> map) {
+        String keywords = map.get("keywords");
+        if (StringUtils.isEmpty(keywords)) {
+            return new Response().failure(4001, "参数缺失");
+        }
+        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByKeywordsContains(keywords);
+        return new Response().success(paperNodes);
+    }
+
+    /**
+     * 通过论文 year 来查询论文信息
+     *
+     * @param map
+     * @return
+     */
+    @PostMapping("/getPapersByYear")
+    public Response getPapersByYear(@RequestBody Map<String, String> map) {
+        String year = map.get("year");
+        if (StringUtils.isEmpty(year)) {
+            return new Response().failure(4001, "参数缺失");
+        }
+        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByYear(Integer.parseInt(year));
+        return new Response().success(paperNodes);
+    }
+
+
+    /**
+     * 通过论文发表 areaCode 来查询论文信息
+     * @param map
+     * @return
+     */
+    @PostMapping("/getPapersByAreaCode")
+    public Response getPapersByAreaCode(@RequestBody Map<String, String> map) {
+        String areaCode = map.get("areaCode");
+        if (StringUtils.isEmpty(areaCode)) {
+            return new Response().failure(4001, "参数缺失");
+        }
+        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByAreaCode(Integer.parseInt(areaCode));
         return new Response().success(paperNodes);
     }
 

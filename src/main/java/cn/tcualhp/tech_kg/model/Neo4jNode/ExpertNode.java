@@ -5,9 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.neo4j.ogm.annotation.*;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -25,9 +23,15 @@ public class ExpertNode {
     @GeneratedValue
     private long nodeId;
 
+    /**
+     * 专家姓名
+     * */
     @Property(name = "name")
     private String name;
 
+    /**
+     * 专家编号，编号唯一
+     * */
     @Property(name = "code")
     private String code;
 
@@ -57,6 +61,10 @@ public class ExpertNode {
         paperNodes.add(paperNode);
     }
 
+    public Set<PaperNode> getPaperNodes() {
+        return paperNodes;
+    }
+  
     @Override
     public String toString() {
         return "ExpertNode{" +

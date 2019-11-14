@@ -30,6 +30,31 @@ public class PaperNode {
     @Property(name = "name")
     private String name;
 
+    @Property(name = "paper_id")
+    private String paperId;
+
+    @Property(name = "keywords")
+    private String keywords;
+
+    @Property(name = "year")
+    private int year;
+
+    @Property(name = "abstract")
+    private String paperAbstract;
+
+    /**
+     * 注意，此处的 area_code 是 int 类型。此处曾经引发一次惊心动魄的 trouble shot
+     */
+    @Property(name = "area_code")
+    private int areaCode;
+
+    @Property(name = "first_author_code")
+    private String firstAuthorCode;
+
+    @Property(name = "url")
+    private String url;
+
+
     /**
      * 论文id
      */
@@ -53,6 +78,7 @@ public class PaperNode {
 
     /**
      * 发表入方向，即作者
+     *
      * @param null
      * @return
      * @author lihepeng
@@ -64,8 +90,9 @@ public class PaperNode {
     @Relationship(type = "write", direction = Relationship.INCOMING)
     private Set<ExpertNode> expertNodes;
 
-    public void addExpertNodes(ExpertNode expertNode){
-        if (expertNodes == null){
+    public void addExpertNodes(ExpertNode expertNode) {
+        // 如果专家节点为空
+        if (expertNodes == null) {
             expertNodes = new HashSet<>();
         }
         expertNodes.add(expertNode);
