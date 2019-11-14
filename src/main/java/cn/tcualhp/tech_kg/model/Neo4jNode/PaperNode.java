@@ -34,7 +34,23 @@ public class PaperNode {
     private String keywords;
 
     @Property(name = "year")
-    private String year;
+    private int year;
+
+    @Property(name = "abstract")
+    private String paperAbstract;
+
+    /**
+     * 注意，此处的 area_code 是 int 类型。此处曾经引发一次惊心动魄的 trouble shot
+     */
+    @Property(name = "area_code")
+    private int areaCode;
+
+    @Property(name = "first_author_code")
+    private String firstAuthorCode;
+
+    @Property(name = "url")
+    private String url;
+
 
     /**
      * 发表入方向，即作者

@@ -17,7 +17,7 @@ public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
      * @param name  论文信息
      * @return List<PaperNode>
      */
-    List<PaperNode> getPapersByNameContains(@Param("name") String name);
+    List<PaperNode> getPaperNodeByNameContains(@Param("name") String name);
 
     /**
      * 描述
@@ -31,6 +31,19 @@ public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
      * @param keywords
      * @return
      */
-    List<PaperNode> getPaperNodeByKeywordsContains(@Param("keywords") String keywords)
+    List<PaperNode> getPaperNodeByKeywordsContains(@Param("keywords") String keywords);
 
+    /**
+     * 根据论文发表 year 年份获取论文信息
+     * @param year
+     * @return
+     */
+    List<PaperNode> getPaperNodeByYear(@Param("year") int year);
+
+    /**
+     * 通过论文发表的 area_code 获取论文信息
+     * @param areaCode
+     * @return
+     */
+    List<PaperNode> getPaperNodeByAreaCode(@Param("areaCode") int areaCode);
 }
