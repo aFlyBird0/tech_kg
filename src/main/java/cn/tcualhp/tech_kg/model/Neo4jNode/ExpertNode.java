@@ -25,13 +25,13 @@ public class ExpertNode {
 
     /**
      * 专家姓名
-     * */
+     */
     @Property(name = "name")
     private String name;
 
     /**
      * 专家编号，编号唯一
-     * */
+     */
     @Property(name = "code")
     private String code;
 
@@ -47,15 +47,19 @@ public class ExpertNode {
     @Relationship(type = "expert_belong_to_unit", direction = Relationship.OUTGOING)
     private Set<UnitNode> unitNodes;
 
-    public void addUnitNodes(UnitNode unitNode){
-        if (unitNodes == null){
+
+//    @Relationship(type = "expert_involved_in_subject",direction = Relationship.OUTGOING)
+//    private Set<JournalNode>
+
+    public void addUnitNodes(UnitNode unitNode) {
+        if (unitNodes == null) {
             unitNodes = new HashSet<>();
         }
         unitNodes.add(unitNode);
     }
 
-    public void addPaperNode(PaperNode paperNode){
-        if (paperNodes == null){
+    public void addPaperNode(PaperNode paperNode) {
+        if (paperNodes == null) {
             paperNodes = new HashSet<PaperNode>();
         }
         paperNodes.add(paperNode);

@@ -26,10 +26,10 @@ public class ExpertController {
     private ExpertNodeRepo expertNodeRepo;
 
     @PostMapping("/getExpertsByName")
-    public Response getExpertsByName(@RequestBody Map<String, String> map){
+    public Response getExpertsByName(@RequestBody Map<String, String> map) {
         String name = map.get("name");
-        if(StringUtils.isEmpty(name)){
-            return new Response().failure(40001, "参数错误，name不能为空");
+        if (StringUtils.isEmpty(name)) {
+            return new Response().failure(4001, "参数缺失");
         }
         System.out.println("传入姓名为：" + name);
         List<ExpertNode> expertNodes = expertNodeRepo.getExpertNodesByName(name);
@@ -37,10 +37,10 @@ public class ExpertController {
     }
 
     @PostMapping("/getExpertByCode")
-    public Response getExpertsByCode(@RequestBody Map<String, String> map){
+    public Response getExpertsByCode(@RequestBody Map<String, String> map) {
         String code = map.get("code");
-        if(code.isEmpty()){
-            return new Response().failure(40002, "参数错误，code不能为空");
+        if (code.isEmpty()) {
+            return new Response().failure(4001, "参数缺失");
         }
         ExpertNode expertNode = expertNodeRepo.getExpertNodeByCode(code);
         return new Response().success(expertNode);
