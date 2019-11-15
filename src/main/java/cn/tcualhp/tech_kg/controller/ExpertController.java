@@ -2,7 +2,9 @@ package cn.tcualhp.tech_kg.controller;
 
 import cn.tcualhp.tech_kg.common.Response;
 import cn.tcualhp.tech_kg.model.Neo4jNode.ExpertNode;
+import cn.tcualhp.tech_kg.model.Neo4jNode.PaperNode;
 import cn.tcualhp.tech_kg.neo4jRepo.ExpertNodeRepo;
+import cn.tcualhp.tech_kg.neo4jRepo.PaperNodeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * @author lihepeng
@@ -41,8 +44,20 @@ public class ExpertController {
         String code = map.get("code");
         if (code.isEmpty()) {
             return new Response().failure(4001, "参数缺失");
+        if(StringUtils.isEmpty(code)){
+            return new Response().failure(40002, "参数错误，code不能为空");
         }
         ExpertNode expertNode = expertNodeRepo.getExpertNodeByCode(code);
         return new Response().success(expertNode);
+    }
+
+    @PostMapping("/getExpertsByPaperId")
+    public Response getExpertsByPaperId(@RequestBody Map<String, String> map){
+        String papaerId = map.get("paperId");
+        if(StringUtils.isEmpty(papaerId)){
+            return new Response().failure(40005, "参数错误, paperId不能为空");
+        }
+        PaperNode paperNode = paperNodeRepo.getPaperNodeByPaperId(papaerId);
+        return new Response().success(paperNode.getExpertNodes());
     }
 }
