@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -89,8 +88,8 @@ public class PaperController {
         if (StringUtils.isEmpty(paperId)) {
             return new Response().failure(4001, "参数缺失");
         }
-        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByPaperId(paperId);
-        return new Response().success(paperNodes);
+        PaperNode paperNode = paperNodeRepo.getPaperNodeByPaperId(paperId);
+        return new Response().success(paperNode);
     }
 
 

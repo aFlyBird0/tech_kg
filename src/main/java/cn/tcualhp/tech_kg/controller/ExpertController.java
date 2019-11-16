@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 /**
  * @author lihepeng
@@ -28,8 +27,16 @@ public class ExpertController {
     @Autowired
     private ExpertNodeRepo expertNodeRepo;
 
-    @PostMapping("/getExpertsByName")
-    public Response getExpertsByName(@RequestBody Map<String, String> map) {
+    @Autowired
+    private PaperNodeRepo paperNodeRepo;
+
+    /**
+     * 通过专家名查询专家信息
+     * @param map
+     * @return  返回专家名匹配的专家的信息
+     */
+    @PostMapping("/getExpertByExpertName")
+    public Response getExpertsByExpertName(@RequestBody Map<String, String> map) {
         String name = map.get("name");
         if (StringUtils.isEmpty(name)) {
             return new Response().failure(4001, "参数缺失");
@@ -39,25 +46,34 @@ public class ExpertController {
         return new Response().success(expertNodes);
     }
 
+    /**
+     * 通过专家 code 专家号码，返回专家信息
+     * @param map
+     * @return  专家的节点。因为专家的 code 是唯一的，所以返回一个节点
+     */
     @PostMapping("/getExpertByCode")
     public Response getExpertsByCode(@RequestBody Map<String, String> map) {
         String code = map.get("code");
-        if (code.isEmpty()) {
-            return new Response().failure(4001, "参数缺失");
-        if(StringUtils.isEmpty(code)){
-            return new Response().failure(40002, "参数错误，code不能为空");
+        if (StringUtils.isEmpty(code)) {
+            return new Response().failure(4002, "参数缺失");
         }
         ExpertNode expertNode = expertNodeRepo.getExpertNodeByCode(code);
         return new Response().success(expertNode);
     }
 
-    @PostMapping("/getExpertsByPaperId")
-    public Response getExpertsByPaperId(@RequestBody Map<String, String> map){
-        String papaerId = map.get("paperId");
-        if(StringUtils.isEmpty(papaerId)){
-            return new Response().failure(40005, "参数错误, paperId不能为空");
+    /**
+     * 通过论文 paperId 查询专家信息
+     * @param map
+     * @return 返回专家的信息
+     */
+    @PostMapping("/getExpertByPaperId")
+    public Response getExpertsByPaperId(@RequestBody Map<String, String> map) {
+        String paperId = map.get("paperId");
+        if (StringUtils.isEmpty(paperId)) {
+            return new Response().failure(4003, "参数缺失");
         }
-        PaperNode paperNode = paperNodeRepo.getPaperNodeByPaperId(papaerId);
+        PaperNode paperNode = paperNodeRepo.getPaperNodeByPaperId(paperId);
         return new Response().success(paperNode.getExpertNodes());
     }
+
 }

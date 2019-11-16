@@ -25,7 +25,10 @@ import java.util.Objects;
 public class JournalNode {
     @Id
     @GeneratedValue
-    private Long nodeId;
+    private long nodeId;
+
+    @Property(name = "name")
+    private String name;
 
     @Property(name = "journal_name")
     private String journalName;
@@ -37,14 +40,6 @@ public class JournalNode {
     private String journalUrl;
 
 
-//    public void addJournalNodes(JournalNode journalNode) {
-//        if (journalNode == null) {
-//            journalNode = new HashSet<>();
-//        }
-//        expertNodes.add(expertNode);
-//    }
-
-
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -54,12 +49,22 @@ public class JournalNode {
             return false;
         }
         JournalNode journalNode = (JournalNode) obj;
-        return nodeId.equals(journalNode.nodeId) &&
+        return nodeId == journalNode.nodeId &&
                 journalName.equals(journalNode.journalName);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(nodeId, journalName);
+    }
+
+    @Override
+    public String toString() {
+        return "JournalNode{" +
+                "nodeId=" + nodeId +
+                ", journalName='" + journalName + '\'' +
+                ", journalQuality='" + journalQuality + '\'' +
+                ", journalUrl='" + journalUrl + '\'' +
+                '}';
     }
 }

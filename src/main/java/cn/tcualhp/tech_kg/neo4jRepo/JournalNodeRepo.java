@@ -7,9 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-//@Data
-//@NoArgsConstructor
-//@AllArgsConstructor
 /**
  * 该 node 在 neo4j 的名称，对于 期刊 节点，其名称为 Journal
  */

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import org.neo4j.ogm.annotation.*;
 
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -68,7 +69,7 @@ public class ExpertNode {
     public Set<PaperNode> getPaperNodes() {
         return paperNodes;
     }
-  
+
     @Override
     public String toString() {
         return "ExpertNode{" +
@@ -78,5 +79,24 @@ public class ExpertNode {
                 ", paperNodes=" + "DO NOT PRINT" +
                 ", unitNodes=" + "DO NOT PRINT" +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        ExpertNode that = (ExpertNode) o;
+        return nodeId == that.nodeId &&
+                name.equals(that.name) &&
+                code.equals(that.code);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(nodeId, name, code);
     }
 }

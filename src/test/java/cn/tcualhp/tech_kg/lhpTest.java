@@ -34,7 +34,7 @@ public class lhpTest extends TechKgApplicationTests{
 
     @Test
     void getPapersByPaperName(){
-        List<PaperNode> paperNodes = paperNodeRepo.getPapersByNameContains("基于");
+        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByKeywordsContains("基于");
         for (PaperNode paperNode: paperNodes
              ) {
             System.out.println(paperNode);

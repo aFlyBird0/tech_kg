@@ -1,6 +1,7 @@
 package cn.tcualhp.tech_kg.neo4jRepo;
 
 import cn.tcualhp.tech_kg.model.Neo4jNode.PaperNode;
+import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -11,6 +12,7 @@ import java.util.List;
  * @description 论文查询neo4j的Repo
  * @date 2019-11-02 21:44
  **/
+@NodeEntity(label = "Paper")
 public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
     /**
      * 根据论文 name 论文名 获取论文信息
@@ -26,7 +28,7 @@ public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
      * @param paperId 论文 paperId
      * @return 返回论文节点 PaperNode 的 list
      */
-    List<PaperNode> getPaperNodeByPaperId(@Param("paperId") String paperId);
+    PaperNode getPaperNodeByPaperId(@Param("paperId") String paperId);
 
     /**
      * 根据论文关键词获取论文信息
