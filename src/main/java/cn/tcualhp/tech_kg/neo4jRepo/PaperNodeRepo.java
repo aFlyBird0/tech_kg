@@ -12,7 +12,6 @@ import java.util.List;
  * @description 论文查询neo4j的Repo
  * @date 2019-11-02 21:44
  **/
-@NodeEntity(label = "Paper")
 public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
     /**
      * 根据论文 name 论文名 获取论文信息

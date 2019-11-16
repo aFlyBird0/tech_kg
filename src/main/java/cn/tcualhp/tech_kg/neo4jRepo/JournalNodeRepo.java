@@ -10,7 +10,6 @@ import java.util.List;
 /**
  * 该 node 在 neo4j 的名称，对于 期刊 节点，其名称为 Journal
  */
-@NodeEntity(label = "Journal")
 /**
  * @author jerry
  * @description 期刊 Journal 的Repo

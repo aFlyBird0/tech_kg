@@ -1,0 +1,6 @@
+spring:
+  data:
+    neo4j:
+      username: neo4j
+      password: 990424
+      uri: http://localhost:7474
