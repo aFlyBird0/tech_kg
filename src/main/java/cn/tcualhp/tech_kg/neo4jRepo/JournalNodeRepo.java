@@ -1,7 +1,6 @@
 package cn.tcualhp.tech_kg.neo4jRepo;
 
 import cn.tcualhp.tech_kg.model.Neo4jNode.JournalNode;
-import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -10,7 +9,7 @@ import java.util.List;
 /**
  * 该 node 在 neo4j 的名称，对于 期刊 节点，其名称为 Journal
  */
-@NodeEntity(label = "Journal")
+//@NodeEntity(label = "Journal")    // 注意此处不应该出现改语句，此语句引发了一次长达 4 小时的 trouble shot
 /**
  * @author jerry
  * @description 期刊 Journal 的Repo
