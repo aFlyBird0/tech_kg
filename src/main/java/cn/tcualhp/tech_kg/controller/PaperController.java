@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -38,7 +37,7 @@ public class PaperController {
      * @param map
      * @return cn.tcualhp.tech_kg.common.Response
      * @author lihepeng
-     * @description //TODO
+     * @description 通过论文名查找论文
      * @date 22:16 2019/11/2
      **/
     @PostMapping("/getPapersByPaperName")
@@ -85,12 +84,12 @@ public class PaperController {
      **/
     @PostMapping("/getPapersByPaperId")
     public Response getPapersByPaperId(@RequestBody Map<String, String> map) {
-        String paperId = map.get("paper_id");
+        String paperId = map.get("paperId");
         if (StringUtils.isEmpty(paperId)) {
             return new Response().failure(4001, "参数缺失");
         }
-        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByPaperId(paperId);
-        return new Response().success(paperNodes);
+        PaperNode paperNode = paperNodeRepo.getPaperNodeByPaperId(paperId);
+        return new Response().success(paperNode);
     }
 
 
@@ -129,6 +128,7 @@ public class PaperController {
 
     /**
      * 通过论文发表 areaCode 来查询论文信息
+     *
      * @param map
      * @return
      */

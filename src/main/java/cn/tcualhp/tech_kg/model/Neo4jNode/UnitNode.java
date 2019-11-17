@@ -36,8 +36,8 @@ public class UnitNode {
     @Relationship(type = "expert_belong_to_unit", direction = Relationship.INCOMING)
     private Set<ExpertNode> expertNodes;
 
-    public void addExpertNodes(ExpertNode expertNode){
-        if (expertNodes == null){
+    public void addExpertNodes(ExpertNode expertNode) {
+        if (expertNodes == null) {
             expertNodes = new HashSet<>();
         }
         expertNodes.add(expertNode);

@@ -30,17 +30,15 @@ public class PaperNode {
     @Property(name = "name")
     private String name;
 
+    /**
+     * 论文id
+     */
     @Property(name = "paper_id")
     private String paperId;
 
+
     @Property(name = "keywords")
     private String keywords;
-
-    @Property(name = "year")
-    private int year;
-
-    @Property(name = "abstract")
-    private String paperAbstract;
 
     /**
      * 注意，此处的 area_code 是 int 类型。此处曾经引发一次惊心动魄的 trouble shot
@@ -48,18 +46,11 @@ public class PaperNode {
     @Property(name = "area_code")
     private int areaCode;
 
-    @Property(name = "first_author_code")
-    private String firstAuthorCode;
-
+    /**
+     * 论文在知网中的地址 url
+     */
     @Property(name = "url")
     private String url;
-
-
-    /**
-     * 论文id
-     */
-    @Property(name = "paper_id")
-    private String paperId;
 
     /**
      * 论文发表年份
@@ -73,6 +64,9 @@ public class PaperNode {
     @Property(name = "abstract")
     private String paperAbstract;
 
+    /**
+     * 论文第一作者 code 号
+     */
     @Property(name = "first_author_code")
     private String firstAuthorCode;
 
@@ -85,7 +79,7 @@ public class PaperNode {
      * @description //TODO
      * @date 14:53 2019/11/4
      **/
-    //防止序列化循环
+    /**防止序列化循环*/
     @JsonIgnore
     @Relationship(type = "write", direction = Relationship.INCOMING)
     private Set<ExpertNode> expertNodes;
@@ -128,4 +122,9 @@ public class PaperNode {
                 ", expertNodes=" + expertNodes +
                 '}';
     }
+
+    public Set<ExpertNode> getExpertNodes() {
+        return expertNodes;
+    }
+
 }
