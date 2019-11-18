@@ -4,15 +4,8 @@ server:
     context-path: /api
 
 spring:
-  data:
-    neo4j:
-      username: neo4j
-      # lhp dev 的密码
-      # password: 990424
-      # dj_dev 的密码
-      password: dev@123456
-      uri: http://localhost:7474
-#      uri: http://172.20.10.2:7474
+  profiles:
+    active: @profileActive@
   main:
     # 想知道这个配置干嘛的，删了之后看报错
     allow-bean-definition-overriding: true
