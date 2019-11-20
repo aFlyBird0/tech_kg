@@ -1,6 +1,7 @@
 package cn.tcualhp.tech_kg.neo4jRepo;
 
 import cn.tcualhp.tech_kg.model.Neo4jNode.PaperNode;
+import com.hankcs.hanlp.seg.common.Term;
 import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
@@ -52,5 +53,20 @@ public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
      * @return 返回论文节点 PaperNode 的 list
      */
     List<PaperNode> getPaperNodeByAreaCode(@Param("areaCode") int areaCode);
+
+    /**
+     * 通过论文发表的  abstract 摘要，来获取论文信息
+     *
+     * @param summary
+     * @return  返回论文节点 PaperNode 的 list
+     */
+    List<PaperNode> getPaperNodeBySummaryContains(@Param("paperAbstract") String summary);
+
+    /**
+     * 通过论文发表的  abstract 摘要，来获取论文信息
+     * @param summary
+     * @return  返回论文节点 PaperNode 的 list
+     */
+    List<PaperNode> getPaperNodeBySummaryContains(@Param("paperAbstract") List<Term> summary);
 
 }
