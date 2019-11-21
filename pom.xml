@@ -101,18 +101,26 @@
             <version>portable-1.7.4</version>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.apache.spark/spark-core
-             spark 依赖项
-        -->
+        <!-- spark 依赖项 -->
         <dependency>
             <groupId>org.apache.spark</groupId>
             <artifactId>spark-core_2.12</artifactId>
-            <version>2.4.3</version>
+            <version>2.4.4</version>
+            <exclusions>
+                <!-- 加入此语句否则将引起警告 -->
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.spark</groupId>
+            <artifactId>spark-mllib_2.12</artifactId>
+            <version>2.4.0</version>
         </dependency>
 
-
     </dependencies>
-
 
 
     <build>
