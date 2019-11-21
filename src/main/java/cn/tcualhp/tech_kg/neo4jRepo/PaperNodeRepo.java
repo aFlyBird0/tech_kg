@@ -67,6 +67,6 @@ public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
      * @param summary
      * @return  返回论文节点 PaperNode 的 list
      */
-    List<PaperNode> getPaperNodeBySummaryContains(@Param("paperAbstract") List<Term> summary);
+    PaperNode getPaperNodeNLPBySummaryContains(@Param("paperAbstract") String summary);
 
 }

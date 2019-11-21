@@ -5,6 +5,7 @@ import cn.tcualhp.tech_kg.model.Neo4jNode.ExpertNode;
 import cn.tcualhp.tech_kg.model.Neo4jNode.PaperNode;
 import cn.tcualhp.tech_kg.neo4jRepo.ExpertNodeRepo;
 import cn.tcualhp.tech_kg.neo4jRepo.PaperNodeRepo;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -146,13 +148,14 @@ public class PaperController {
 
     /**
      * 通过论文的 abstract 摘要来查询论文信息
+     *
      * @param map
      * @return 返回 paperNode 的 list
      */
     @PostMapping("/getPapersByAbstract")
     public Response getPapersByAbstract(@RequestBody Map<String, String> map) {
         String summary = map.get("abstract");
-        if (StringUtils.isEmpty(summary)){
+        if (StringUtils.isEmpty(summary)) {
             return new Response().failure(4001, "参数缺失");
         }
         List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeBySummaryContains(summary);
@@ -161,18 +164,39 @@ public class PaperController {
 
     /**
      * 通过论文的 abstract 摘要来查询论文信息
+     *
      * @param map
      * @return 返回 paperNode 的 list
      */
     @PostMapping("/getPapersByAbstractNLP")
     public Response getPapersByAbstractNLP(@RequestBody Map<String, String> map) {
         String summary = map.get("abstract");
-        if (StringUtils.isEmpty(summary)){
+        if (StringUtils.isEmpty(summary)) {
             return new Response().failure(4002, "参数缺失");
         }
         List<Term> summaryList = StandardTokenizer.segment(summary);
-        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeBySummaryContains(summaryList);
-        return new Response().success(paperNodes);
+        List<PaperNode> allPaperNodes = new ArrayList<>();
+        List<PaperNode> paperNodes;
+
+        /**
+         * 对于分词出来的每一个词，在 keywords 字段中查询相匹配的 paperNode
+         */
+        for (Term term : summaryList) {
+            paperNodes = paperNodeRepo.getPaperNodeByKeywordsContains(term.word);
+            while (!paperNodes.isEmpty()) {
+                PaperNode paperNode = paperNodes.get(0);
+                try {
+                    if (!allPaperNodes.contains(paperNode)) {
+                        allPaperNodes.add(paperNode);
+                    }
+                } catch (NullPointerException e) {
+                    System.out.println("空指针错误");
+                }
+                paperNodes.remove(0);
+
+            }
+        }
+        return new Response().success(allPaperNodes);
     }
 
 }
