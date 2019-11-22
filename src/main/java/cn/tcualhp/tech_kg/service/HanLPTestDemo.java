@@ -33,7 +33,9 @@ public class HanLPTestDemo {
         list.clear();
         list = NLPTokenizer.segment("我新造一个词叫幻想乡你能识别并标注正确词性吗？");
         for (Term t : list) {
-            System.out.println(t);
+            System.out.println(t.word);
+            String s = "n";
+            System.out.println(s.equals(t.nature.toString()));
         }
 
     }
