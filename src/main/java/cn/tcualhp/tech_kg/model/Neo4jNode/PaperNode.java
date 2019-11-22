@@ -60,9 +60,11 @@ public class PaperNode {
 
     /**
      * 论文概要
+     * 在 mysql 源数据中，论文的摘要字段名称为 abstract
+     * 为了避免冲突，在 neo4j 中修改其名称为 paper_abstract
      */
-    @Property(name = "abstract")
-    private String paperAbstract;
+    @Property(name = "paper_abstract")
+    private String summary;
 
     /**
      * 论文第一作者 code 号
