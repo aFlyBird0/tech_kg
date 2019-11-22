@@ -64,7 +64,7 @@ public class testProcess {
     /**
      * 指定问题question及字典的txt模板所在的根目录
      */
-    private String rootDirPath = "D:/HanLP/data";
+    private String rootDirPath = "root=D:/Github_Repositories/HanLP/data-for-1.7.4/";
 
     /**
      * 分类模板索引
@@ -131,7 +131,7 @@ public class testProcess {
     public String queryAbstract(String querySentence) {
         /**
          * 这里举一个例子，例如需要查询如下问句：
-         * 王振东写了发表了哪些论文？
+         * 王振东发表了哪些论文？
          */
         Segment segment = HanLP.newSegment().enableCustomDictionary(true);
         List<Term> terms = segment.seg(querySentence);
@@ -158,22 +158,28 @@ public class testProcess {
 
             /**
              * 如果包含人名
+             * nr发表了哪些论文？
              */
-            if (termStr.contains("/nr")) {
+            if (termStr.contains("/nr") && nrCount == 0) {
+                // nr 代表人名
                 abstractQuery += "nr ";
                 abstractMap.put("nr", word);
-            } else if (termStr.contains("nr") && nrCount == 0) { //nr 人名
-                abstractQuery += "nnt ";
-                abstractMap.put("nnt", word);
-                nrCount++;
-            } else if (termStr.contains("nr") && nrCount == 1) { //nr 人名 再出现一次，改成nnr
-                abstractQuery += "nnr ";
-                abstractMap.put("nnr", word);
-                nrCount++;
-            } else if (termStr.contains("x")) {  //x  评分
+//            } else if (termStr.contains("nr") && nrCount == 0) {
+//                //nr 人名
+//                abstractQuery += "nnt ";
+//                abstractMap.put("nnt", word);
+//                nrCount++;
+//            } else if (termStr.contains("nr") && nrCount == 1) {
+//                //nr 人名 再出现一次，改成nnr
+//                abstractQuery += "nnr ";
+//                abstractMap.put("nnr", word);
+//                nrCount++;
+            } else if (termStr.contains("x")) {
+                //x  评分
                 abstractQuery += "x ";
                 abstractMap.put("x", word);
-            } else if (termStr.contains("ng")) { //ng 类型
+            } else if (termStr.contains("ng")) {
+                //ng 类型
                 abstractQuery += "ng ";
                 abstractMap.put("ng", word);
             } else {
@@ -184,15 +190,19 @@ public class testProcess {
         return abstractQuery;
     }
 
+    /**
+     * 将句子进行还原
+     *
+     * @param queryPattern
+     * @return
+     */
     public String queryExtenstion(String queryPattern) {
-        // 句子还原
         Set<String> set = abstractMap.keySet();
         for (String key : set) {
             /**
              * 如果句子模板中含有抽象的词性
              */
             if (queryPattern.contains(key)) {
-
                 /**
                  * 则替换抽象词性为具体的值
                  */
@@ -224,7 +234,7 @@ public class testProcess {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
-        String line;
+        String line = new String();
         try {
             while ((line = br.readLine()) != null) {
                 String[] tokens = line.split(":");
@@ -343,7 +353,7 @@ public class testProcess {
          * 用一个label/response进行关联。在MLlib里，labeled points 被用来监督学习算法
          * 我们使用一个double数来存储一个label，因此我们能够使用labeled points进行回归和分类
          */
-        List<LabeledPoint> train_list = new LinkedList<LabeledPoint>();
+        List<LabeledPoint> trainList = new LinkedList<LabeledPoint>();
         String[] sentences = null;
 
 
@@ -354,8 +364,8 @@ public class testProcess {
         sentences = scoreQuestions.split("`");
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
-            LabeledPoint train_one = new LabeledPoint(0.0, Vectors.dense(array));
-            train_list.add(train_one);
+            LabeledPoint trainOne = new LabeledPoint(0.0, Vectors.dense(array));
+            trainList.add(trainOne);
         }
 
         /**
@@ -366,7 +376,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(1.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
 
@@ -378,7 +388,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(2.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
 
@@ -390,7 +400,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(3.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
         /**
@@ -401,7 +411,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(4.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
 
@@ -413,7 +423,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(5.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
         /**
@@ -424,7 +434,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(6.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
 
@@ -436,7 +446,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(7.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
         /**
@@ -447,7 +457,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(8.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
 
@@ -459,7 +469,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(9.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
 
@@ -471,7 +481,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(10.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
         /**
@@ -482,7 +492,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(11.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
 
@@ -494,7 +504,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(12.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
 
@@ -506,7 +516,7 @@ public class testProcess {
         for (String sentence : sentences) {
             double[] array = sentenceToArrays(sentence);
             LabeledPoint train_one = new LabeledPoint(13.0, Vectors.dense(array));
-            train_list.add(train_one);
+            trainList.add(train_one);
         }
 
         /**
@@ -515,7 +525,7 @@ public class testProcess {
          * JavaSparkContext sc = new JavaSparkContext(sparkConf);    //对应JavaRDD
          * SparkContext	    sc = new SparkContext(sparkConf)    ;    //对应RDD
          */
-        JavaRDD<LabeledPoint> trainingRDD = sc.parallelize(train_list);
+        JavaRDD<LabeledPoint> trainingRDD = sc.parallelize(trainList);
         NaiveBayesModel nb_model = NaiveBayes.train(trainingRDD.rdd());
 
         /**
