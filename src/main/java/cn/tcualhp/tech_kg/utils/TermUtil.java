@@ -16,6 +16,12 @@ import java.util.List;
  **/
 
 public class TermUtil {
+    /**
+     * 判断
+     * @param t
+     * @param s
+     * @return
+     */
     public  static  Boolean isWordNatureEquals(Term t, String s){
         return !StringUtils.isEmpty(s) && s.equals(t.nature.toString());
     }
