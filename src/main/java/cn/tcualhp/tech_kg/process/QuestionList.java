@@ -19,7 +19,6 @@ import java.util.List;
  **/
 
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
 public class QuestionList {
     private String fileName;
@@ -29,18 +28,16 @@ public class QuestionList {
 
     public QuestionList(String fileName) {
         this.fileName = fileName;
-    }
 
-    public List<Question> getQuestions() {
         if (this.fileName == null) {
-            return null;
+            return;
         }
         JSONObject jsonObject = null;
         try {
             jsonObject = LoadJsonUtil.getJsonObject(this.fileName);
         } catch (Exception e) {
             e.printStackTrace();
-            return null;
+            return;
         }
 
         /**
@@ -53,7 +50,17 @@ public class QuestionList {
          */
         List<Question> questions = JSONArray.parseArray(jsonArray.toString(), Question.class);
         this.questions = questions;
-        return questions;
+
+        //获取问题描述
+        String questionDescription = (String) jsonObject.get("questionDescription");
+        this.questionDescription = questionDescription;
+
+        //获取问题类型
+        //之前漏了一行导致分类器所有问题类型都是默认0
+        //导致分类结果都是类型0
+        //还好一下子就找到了
+        this.questionType = Integer.parseInt(jsonObject.get("questionType").toString());
+
     }
 
     public static void main(String[] args) throws IOException {
