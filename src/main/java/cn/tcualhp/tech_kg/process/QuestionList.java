@@ -25,7 +25,7 @@ import java.util.List;
 @AllArgsConstructor
 public class QuestionList {
     private String fileName;
-    private String questionType;
+    private int questionType;
     private String questionDescription;
     private List<Question> questions;
 
