@@ -1,12 +1,12 @@
 package cn.tcualhp.tech_kg.process;
 
-import com.alibaba.fastjson.JSON;
-import org.apache.commons.io.IOUtils;
+import cn.tcualhp.tech_kg.utils.LoadJsonUtil;
+import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 /**
  * @author jerry
@@ -17,49 +17,41 @@ import java.util.Objects;
  **/
 
 public class Question {
-    private String id;
-    private String question;
+    private String questionType;
+    private long id;
+    private String value;
 
-    public  List<Question> loadQuestions(String filename) throws IOException {
-        InputStream inputStream = this.getClass().getResourceAsStream(filename);
-        String text = IOUtils.toString(inputStream, "utf8");
-        List<Question> questionList = JSON.parseArray(text, Question.class);
-        return questionList;
+    /**
+     * 返回指定问题 json 文件下，指定的问题类型下的 问题的 list
+     * @param filename 文件名
+     * @param questionType 问题类型
+     * @return list 问题类型列表
+     * @throws IOException
+     */
+    public List<Question> getQuestionsList(String filename, String questionType) throws IOException {
+        JSONObject jsonObject = LoadJsonUtil.getJsonObject(filename);
+        List<Question> questionsList = new ArrayList<>();
+        JSONArray questions = jsonObject.getJSONArray(questionType);
+        for (int i = 0; i < questions.size();i++) {
+            Question q = new Question();
+            q.id = i + 1;
+            q.value = questions.getJSONObject(i).getString("value");
+            questionsList.add(q);
+        }
+        return questionsList;
     }
 
     public static void main(String[] args) throws IOException {
         Question question = new Question();
-        List<Question> questions = question.loadQuestions("question.json");
-//        for (question:questions) throw NullPointerException{
-//            System.out.println(question);
-//        }
-
-    }
-
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
+        List<Question> questions = question.getQuestionsList("questions/questionPublish.json","publish");
+        for (Question q:questions) {
+            System.out.println(q.id + q.value);
         }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
+        List<Question> questions1 = question.getQuestionsList("questions/questionWorkIn.json","workIn");
+        for (Question q:questions1) {
+            System.out.println(q.id + q.value);
         }
-        Question question1 = (Question) o;
-        return id.equals(question1.id) &&
-                Objects.equals(question, question1.question);
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, question);
-    }
 
-    @Override
-    public String toString() {
-        return "Question{" +
-                "id='" + id + '\'' +
-                ", question='" + question + '\'' +
-                '}';
-    }
 }
