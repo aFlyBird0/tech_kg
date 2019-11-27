@@ -1,5 +1,9 @@
 package cn.tcualhp.tech_kg.process;
 
+import cn.tcualhp.tech_kg.utils.TermUtil;
+import com.hankcs.hanlp.HanLP;
+import com.hankcs.hanlp.seg.Segment;
+import com.hankcs.hanlp.seg.common.Term;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -9,21 +13,8 @@ import org.apache.spark.mllib.linalg.Vector;
 import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.regression.LabeledPoint;
 
-import com.hankcs.hanlp.HanLP;
-import com.hankcs.hanlp.seg.Segment;
-import com.hankcs.hanlp.seg.common.Term;
-
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.io.*;
+import java.util.*;
 
 /**
  * @author jerry
@@ -85,6 +76,7 @@ public class testProcess {
         nbModel = loadClassifierModel();
     }
 
+
     public ArrayList<String> analyQuery(String queryString) throws Exception {
 
         /**
@@ -142,7 +134,7 @@ public class testProcess {
          * nr 人名词性这个 词语出现的频率
          */
         int nrCount = 0;
-
+        
         for (Term term : terms) {
             /**
              * HanLP 分词后得到的词
@@ -152,15 +144,14 @@ public class testProcess {
             /**
              * HanLP 分词后的连带词语和词性的 string
              */
-            String termStr = term.toString();
-
-            System.out.println(termStr);
 
             /**
              * 如果包含人名
-             * nr发表了哪些论文？
+             * nr 发表了哪些论文？
              */
-            if (termStr.contains("/nr") && nrCount == 0) {
+
+
+            if (TermUtil.isWordNatureEquals(term,"nr") && nrCount == 0) {
                 // nr 代表人名
                 abstractQuery += "nr ";
                 abstractMap.put("nr", word);
@@ -174,11 +165,11 @@ public class testProcess {
 //                abstractQuery += "nnr ";
 //                abstractMap.put("nnr", word);
 //                nrCount++;
-            } else if (termStr.contains("x")) {
+            } else if (TermUtil.isWordNatureEquals(term,"x")) {
                 //x  评分
                 abstractQuery += "x ";
                 abstractMap.put("x", word);
-            } else if (termStr.contains("ng")) {
+            } else if (TermUtil.isWordNatureEquals(term,"ng")) {
                 //ng 类型
                 abstractQuery += "ng ";
                 abstractMap.put("ng", word);

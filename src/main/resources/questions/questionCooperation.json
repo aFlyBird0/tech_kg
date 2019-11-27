@@ -1,0 +1,22 @@
+{
+  "questionDescription": "与某关键词的论文有哪些",
+  "questionType": 2,
+  "questions": [
+    {
+      "id": 1,
+      "value": "关于nr的论文有哪些"
+    },
+    {
+      "id": 2,
+      "value": "和nr相关的专利有哪些"
+    },
+    {
+      "id": 3,
+      "value": "与nr相关的论文有哪些"
+    },
+    {
+      "id": 4,
+      "value": "与nr相关的论文有哪些"
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "questionDescription": "某人任职与哪个单位",
+  "questionType": 1,
+  "questions": [
+    {
+      "id": 1,
+      "value": "nr任职于哪个单位"
+    },
+    {
+      "id": 2,
+      "value": "nr就职于哪个单位"
+    },
+    {
+      "id": 3,
+      "value": "nr工作于哪个单位"
+    },
+    {
+      "id": 4,
+      "value": "nr供职于哪个单位"
+    },
+    {
+      "id": 5,
+      "value": "nr在哪个单位"
+    },
+    {
+      "id": 6,
+      "value": "nr在哪里"
+    }
+  ]
+}
