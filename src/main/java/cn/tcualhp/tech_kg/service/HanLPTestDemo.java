@@ -31,11 +31,14 @@ public class HanLPTestDemo {
         System.out.println(TextRankKeyword.getKeywordList(demo.string, 5));
 
         list.clear();
-        list = NLPTokenizer.segment("我新造一个词叫幻想乡你能识别并标注正确词性吗？");
+        list = NLPTokenizer.segment("我丁健今天很不开心，因为JSON的文件问题，怼了李鹤鹏。丁健牛。丁健牛逼。");
         for (Term t : list) {
-            System.out.println(t.word);
-            String s = "n";
-            System.out.println(s.equals(t.nature.toString()));
+//            System.out.println(t.word);
+            String s = "nr";
+//            System.out.println(s.equals(t.nature.toString()));
+            if (s.equals(t.nature.toString())) {
+                System.out.println(t.word);
+            }
         }
 
     }

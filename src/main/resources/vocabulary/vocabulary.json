@@ -19,6 +19,131 @@
       "id": 4,
       "value": "算法",
       "type": "n"
+    },
+    {
+      "id": 5,
+      "value": "算法",
+      "type": "n"
+    },
+    {
+      "id": 6,
+      "value": "哪些",
+      "type": "a"
+    },
+    {
+      "id": 7,
+      "value": "那个",
+      "type": "n"
+    },
+    {
+      "id": 8,
+      "value": "那些",
+      "type": "n"
+    },
+    {
+      "id": 9,
+      "value": "发表",
+      "type": "v"
+    },
+    {
+      "id": 10,
+      "value": "写的",
+      "type": "v"
+    },
+    {
+      "id": 11,
+      "value": "哪个",
+      "type": "v"
+    },
+    {
+      "id": 12,
+      "value": "发布",
+      "type": "v"
+    },
+    {
+      "id": 13,
+      "value": "作者",
+      "type": "n"
+    },
+    {
+      "id": 14,
+      "value": "写了",
+      "type": "v"
+    },
+    {
+      "id": 15,
+      "value": "写过",
+      "type": "v"
+    },
+    {
+      "id": 16,
+      "value": "著述",
+      "type": "v"
+    },
+    {
+      "id": 17,
+      "value": "刊登",
+      "type": "v"
+    },
+    {
+      "id": 18,
+      "value": "在职",
+      "type": "v"
+    },
+    {
+      "id": 19,
+      "value": "刊登",
+      "type": "v"
+    },
+    {
+      "id": 20,
+      "value": "高就",
+      "type": "v"
+    },
+    {
+      "id": 21,
+      "value": "在",
+      "type": "v"
+    },
+    {
+      "id": 22,
+      "value": "入职",
+      "type": "v"
+    },
+    {
+      "id": 23,
+      "value": "哪个",
+      "type": "a"
+    },
+    {
+      "id": 24,
+      "value": "哪里",
+      "type": "v"
+    },
+    {
+      "id": 25,
+      "value": "哪边",
+      "type": "v"
+    },
+    {
+      "id": 26,
+      "value": "地方",
+      "type": "n"
+    },
+    {
+      "id": 27,
+      "value": "大学",
+      "type": "n"
+    },
+    {
+      "id": 28,
+      "value": "教授",
+      "type": "n"
+    },
+    {
+      "id": 29,
+      "value": "研究",
+      "type": "v"
     }
   ]
 }

@@ -50,14 +50,14 @@ public class QuestionServiceDemo {
         /**
          * 打印问句
          */
-        System.out.println("原始句子："+queryString);
+        System.out.println("原始句子：" + queryString);
         System.out.println("========HanLP开始分词========");
 
         /**
          * 抽象句子，利用HanPL分词，将关键字进行词性抽象
          */
         String abstr = queryAbstract(queryString);
-        System.out.println("句子抽象化结果："+abstr);// nm 的 导演 是 谁
+        System.out.println("句子抽象化结果：" + abstr);// nm 的 导演 是 谁
 
         /**
          * 将抽象的句子与spark训练集中的模板进行匹配，拿到句子对应的模板
@@ -80,7 +80,7 @@ public class QuestionServiceDemo {
         return resultList;
     }
 
-    public  String queryAbstract(String querySentence) {
+    public String queryAbstract(String querySentence) {
 
         // 句子抽象化
         Segment segment = HanLP.newSegment().enableCustomDictionary(true).enableNameRecognize(true);
@@ -98,18 +98,17 @@ public class QuestionServiceDemo {
                 abstractQuery += "nnt";
                 abstractMap.put("nnt", word);
                 nrCount++;
-            }else if (TermUtil.isWordNatureEquals(term, "nnr") && nrCount == 1) { //nr 人名 再出现一次，改成nnr
+            } else if (TermUtil.isWordNatureEquals(term, "nnr") && nrCount == 1) { //nr 人名 再出现一次，改成nnr
                 abstractQuery += "nnr ";
                 abstractMap.put("nnr", word);
                 nrCount++;
-            }else if (TermUtil.isWordNatureEquals(term, "x")) {  //x  评分
+            } else if (TermUtil.isWordNatureEquals(term, "x")) {  //x  评分
                 abstractQuery += "x ";
                 abstractMap.put("x", word);
             } else if (TermUtil.isWordNatureEquals(term, "ng")) { //ng 类型
                 abstractQuery += "ng ";
                 abstractMap.put("ng", word);
-            }
-            else {
+            } else {
                 abstractQuery += word + " ";
             }
         }
@@ -121,8 +120,7 @@ public class QuestionServiceDemo {
         QuestionServiceDemo questionServiceDemo = new QuestionServiceDemo();
         try {
             questionServiceDemo.analyQuery("将抽象的句子与spark训练集中的模板进行匹配，拿到句子对应的模板,测试张亮打球");
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
