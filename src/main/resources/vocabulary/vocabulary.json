@@ -1,0 +1,24 @@
+{
+  "vocabulary": [
+    {
+      "id": 1,
+      "value": "有",
+      "type": "v"
+    },
+    {
+      "id": 2,
+      "value": "无线网络",
+      "type": "n"
+    },
+    {
+      "id": 3,
+      "value": "自适应",
+      "type": "n"
+    },
+    {
+      "id": 4,
+      "value": "算法",
+      "type": "n"
+    }
+  ]
+}
