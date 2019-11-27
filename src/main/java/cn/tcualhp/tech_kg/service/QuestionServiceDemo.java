@@ -145,7 +145,7 @@ public class QuestionServiceDemo {
         Map<String, Integer> vocabulary = new HashMap<String, Integer>();
         int index = 1;
         try {
-            List<Vocabulary> vocabularies = new Vocabulary().getVocabularyList("/vocabulary/vocabulary.json");
+            Set<Vocabulary> vocabularies = new Vocabulary().getVocabularySet("/vocabulary/vocabulary.json");
             for (Vocabulary v:vocabularies
                  ) {
                 vocabulary.put(v.getValue(), index);
@@ -359,6 +359,10 @@ public class QuestionServiceDemo {
             questionServiceDemo.analyQuery("李鹤鹏工作于哪个单位");
             System.out.println("");
             questionServiceDemo.analyQuery("李鹤鹏在哪里");
+            System.out.println("");
+            questionServiceDemo.analyQuery("有哪些论文是李鹤鹏写的");
+            System.out.println("");
+            questionServiceDemo.analyQuery("李鹤鹏工作的地方在哪里");
             System.out.println("");
         } catch (Exception e) {
             e.printStackTrace();
