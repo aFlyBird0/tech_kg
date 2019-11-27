@@ -1,6 +1,7 @@
 {
-  "questionType": "某人任职与哪个单位",
-  "workIn": [
+  "questionDescription": "某人任职与哪个单位",
+  "questionType": 1,
+  "questions": [
     {
       "id": 1,
       "value": "黎思彤任职于哪个单位"
