@@ -8,7 +8,6 @@ import cn.tcualhp.tech_kg.utils.LoadJsonUtil;
 import cn.tcualhp.tech_kg.utils.TermUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
-import com.google.gson.JsonObject;
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.Segment;
 import com.hankcs.hanlp.seg.common.Term;
@@ -20,16 +19,18 @@ import org.apache.spark.mllib.classification.NaiveBayesModel;
 import org.apache.spark.mllib.linalg.Vector;
 import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.regression.LabeledPoint;
+import org.springframework.stereotype.Component;
 
-import java.io.*;
+import java.io.IOException;
 import java.util.*;
 
 /**
  * @author lihepeng
- * @description 智能问答测试类
- * @date 2019-11-22 19:07
+ * @description 问题到问题模板输出类
+ * @date 2019-11-27 23:23
  **/
-public class QuestionServiceDemo {
+@Component
+public class Question2ModelString {
 
     /**
      * 分类标签号和问句模板对应表
@@ -61,7 +62,7 @@ public class QuestionServiceDemo {
      */
     int modelIndex = 0;
 
-    public QuestionServiceDemo() throws Exception{
+    public Question2ModelString() throws Exception{
         questionsPattern = loadQuestionsPattern();
         vocabulary = loadVocabulary();
         nbModel = loadClassifierModel();
@@ -96,8 +97,8 @@ public class QuestionServiceDemo {
 
         ArrayList<String> resultList = new ArrayList<String>();
         resultList.add(String.valueOf(modelIndex));
-//        String[] finalPattArray = finalPattern.split(" ");
-//        resultList.addAll(Arrays.asList(finalPattArray));
+        String[] finalPattArray = finalPattern.split(" ");
+        resultList.addAll(Arrays.asList(finalPattArray));
         return resultList;
     }
 
@@ -338,7 +339,7 @@ public class QuestionServiceDemo {
 
     public static void main(String[] args) {
         try {
-            QuestionServiceDemo questionServiceDemo = new QuestionServiceDemo();
+            Question2ModelString questionServiceDemo = new Question2ModelString();
             questionServiceDemo.analyQuery("李鹤鹏在哪家单位工作");
             System.out.println("");
             questionServiceDemo.analyQuery("李鹤鹏发表了什么论文");

@@ -8,5 +8,5 @@ public interface QuestionService {
      * @param question
      * @return
      */
-    public String magicAnswer(String question);
+    String magicAnswer(String question);
 }
