@@ -1,6 +1,7 @@
 {
-  "questionType": "某人发表了哪些论文",
-  "publish": [
+  "questionDescription": "某人发表了哪些论文",
+  "questionType": 0,
+  "questions": [
     {
       "id": 1,
       "value": "黎思彤发表了哪些论文？"

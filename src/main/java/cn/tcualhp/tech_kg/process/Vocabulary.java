@@ -3,6 +3,8 @@ package cn.tcualhp.tech_kg.process;
 import cn.tcualhp.tech_kg.utils.LoadJsonUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -15,7 +17,8 @@ import java.util.List;
  * @description 词语库
  * @create 2019/11/27 14:11
  **/
-
+@Data
+@NoArgsConstructor
 public class Vocabulary {
     /**
      * 词的 id 唯一
