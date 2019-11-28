@@ -127,8 +127,8 @@ public class QuestionServiceDemo {
                 /**
                  * 第二次出现人名
                  */
-                abstractQuery += "nr2";
-                abstractMap.put("nr2", word);
+                abstractQuery += "n2r";
+                abstractMap.put("n2r", word);
                 nrCount++;
             }else if (TermUtil.isWordNatureEquals(term, "m")){
                 /**
@@ -406,6 +406,17 @@ public class QuestionServiceDemo {
             questionServiceDemo.analyQuery("有哪些论文是李鹤鹏写的");
             System.out.println("");
             questionServiceDemo.analyQuery("李鹤鹏工作的地方在哪里");
+            System.out.println("");
+            questionServiceDemo.analyQuery("丁健和李鹤鹏合作发表的论文有哪些");
+            System.out.println("");
+            questionServiceDemo.analyQuery("杭电有哪些人");
+            System.out.println("");
+            System.out.println("注：因为还没开启自定义词典，下面的分类应该会错");
+            questionServiceDemo.analyQuery("2019年关于知识图谱的论文有哪些");
+            System.out.println("");
+            questionServiceDemo.analyQuery("杭电有哪些论文");
+            System.out.println("");
+            questionServiceDemo.analyQuery("李鹤鹏发表过的关于知识图谱的论文有哪些");
             System.out.println("");
         } catch (Exception e) {
             e.printStackTrace();
