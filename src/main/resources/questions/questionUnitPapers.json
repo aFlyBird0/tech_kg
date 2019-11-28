@@ -1,0 +1,199 @@
+{
+  "comments": "HanLP 的机构等单位的词性为 ntu ",
+  "questionDescription": "某单位的论文/专利有哪些",
+  "questionType": 4,
+  "questions": [
+    {
+      "id": 1,
+      "value": "ntu的论文有哪些"
+    },
+    {
+      "id": 2,
+      "value": "nt的论文有哪些"
+    },
+    {
+      "id": 3,
+      "value": "ntc的论文有哪些"
+    },
+    {
+      "id": 4,
+      "value": "nth的论文有哪些"
+    },
+    {
+      "id": 5,
+      "value": "nto的论文有哪些"
+    },
+    {
+      "id": 6,
+      "value": "nts的论文有哪些"
+    },
+    {
+      "id": 7,
+      "value": "ntu的论文有"
+    },
+    {
+      "id": 8,
+      "value": "nt的论文有"
+    },
+    {
+      "id": 9,
+      "value": "ntc的论文有"
+    },
+    {
+      "id": 10,
+      "value": "nth的论文有"
+    },
+    {
+      "id": 11,
+      "value": "nto的论文有"
+    },
+    {
+      "id": 12,
+      "value": "nts的论文有"
+    },
+    {
+      "id": 13,
+      "value": "ntu的论文有"
+    },
+    {
+      "id": 14,
+      "value": "nt的论文有"
+    },
+    {
+      "id": 15,
+      "value": "ntc的论文有"
+    },
+    {
+      "id": 16,
+      "value": "nth的论文有"
+    },
+    {
+      "id": 17,
+      "value": "nto的论文有"
+    },
+    {
+      "id": 18,
+      "value": "nts的论文有"
+    },
+    {
+      "id": 19,
+      "value": "ntu的论文"
+    },
+    {
+      "id": 20,
+      "value": "nt的论文"
+    },
+    {
+      "id": 21,
+      "value": "ntc的论文"
+    },
+    {
+      "id": 22,
+      "value": "nth的论文"
+    },
+    {
+      "id": 23,
+      "value": "nto的论文"
+    },
+    {
+      "id": 24,
+      "value": "nts的论文"
+    },
+    {
+      "id": 25,
+      "value": "ntu的专利有哪些"
+    },
+    {
+      "id": 26,
+      "value": "nt的专利有哪些"
+    },
+    {
+      "id": 27,
+      "value": "ntc的专利有哪些"
+    },
+    {
+      "id": 28,
+      "value": "nth的专利有哪些"
+    },
+    {
+      "id": 29,
+      "value": "nto的专利有哪些"
+    },
+    {
+      "id": 30,
+      "value": "nts的专利有哪些"
+    },
+    {
+      "id": 31,
+      "value": "ntu的专利有"
+    },
+    {
+      "id": 32,
+      "value": "nt的专利有"
+    },
+    {
+      "id": 33,
+      "value": "ntc的专利有"
+    },
+    {
+      "id": 34,
+      "value": "nth的专利有"
+    },
+    {
+      "id": 35,
+      "value": "nto的专利有"
+    },
+    {
+      "id": 36,
+      "value": "nts的专利有"
+    },
+    {
+      "id": 37,
+      "value": "ntu的专利有"
+    },
+    {
+      "id": 38,
+      "value": "nt的专利有"
+    },
+    {
+      "id": 39,
+      "value": "ntc的专利有"
+    },
+    {
+      "id": 40,
+      "value": "nth的专利有"
+    },
+    {
+      "id": 41,
+      "value": "nto的专利有"
+    },
+    {
+      "id": 42,
+      "value": "nts的专利有"
+    },
+    {
+      "id": 43,
+      "value": "ntu的专利"
+    },
+    {
+      "id": 44,
+      "value": "nt的专利"
+    },
+    {
+      "id": 45,
+      "value": "ntc的专利"
+    },
+    {
+      "id": 46,
+      "value": "nth的专利"
+    },
+    {
+      "id": 47,
+      "value": "nto的专利"
+    },
+    {
+      "id": 48,
+      "value": "nts的专利"
+    }
+  ]
+}

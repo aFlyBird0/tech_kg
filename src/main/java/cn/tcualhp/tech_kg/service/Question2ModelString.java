@@ -62,7 +62,7 @@ public class Question2ModelString {
      */
     int modelIndex = 0;
 
-    public Question2ModelString() throws Exception{
+    public Question2ModelString() throws Exception {
         questionsPattern = loadQuestionsPattern();
         vocabulary = loadVocabulary();
         nbModel = loadClassifierModel();
@@ -86,14 +86,14 @@ public class Question2ModelString {
          * 将抽象的句子与spark训练集中的模板进行匹配，拿到句子对应的模板
          */
         String strPatt = queryClassify(abstr);
-        System.out.println("句子套用模板结果："+strPatt); // nm 制作 导演列表
+        System.out.println("句子套用模板结果：" + strPatt); // nm 制作 导演列表
 
 
         /**
          * 模板还原成句子，此时问题已转换为我们熟悉的操作
          */
         String finalPattern = queryExtenstion(strPatt);
-        System.out.println("原始句子替换成系统可识别的结果："+finalPattern);// 但丁密码 制作 导演列表
+        System.out.println("原始句子替换成系统可识别的结果：" + finalPattern);// 但丁密码 制作 导演列表
 
         ArrayList<String> resultList = new ArrayList<String>();
         resultList.add(String.valueOf(modelIndex));
@@ -127,15 +127,16 @@ public class Question2ModelString {
 
     /**
      * 加载词汇表 == 关键特征 == 与HanLP分词后的单词进行匹配
+     *
      * @return
      */
-    public  Map<String, Integer> loadVocabulary(){
+    public Map<String, Integer> loadVocabulary() {
         Map<String, Integer> vocabulary = new HashMap<String, Integer>();
         int index = 1;
         try {
             Set<Vocabulary> vocabularies = new Vocabulary().getVocabularySet("/vocabulary/vocabulary.json");
-            for (Vocabulary v:vocabularies
-                 ) {
+            for (Vocabulary v : vocabularies
+            ) {
                 vocabulary.put(v.getValue(), index);
                 index += 1;
             }
@@ -147,11 +148,12 @@ public class Question2ModelString {
 
     /**
      * 句子分词后与词汇表进行key匹配转换为double向量数组
+     *
      * @param sentence
      * @return
      * @throws Exception
      */
-    public  double[] sentenceToArrays(String sentence) throws Exception {
+    public double[] sentenceToArrays(String sentence) throws Exception {
 
         double[] vector = new double[vocabulary.size()];
         /**
@@ -181,11 +183,12 @@ public class Question2ModelString {
 
     /**
      * 贝叶斯分类器分类的结果，拿到匹配的分类标签号，并根据标签号返回问题的模板
+     *
      * @param sentence
      * @return
      * @throws Exception
      */
-    public  String queryClassify(String sentence) throws Exception {
+    public String queryClassify(String sentence) throws Exception {
 
         double[] testArray = sentenceToArrays(sentence);
         Vector v = Vectors.dense(testArray);
@@ -196,7 +199,7 @@ public class Question2ModelString {
          * 根据词汇使用的频率推断出句子对应哪一个模板
          */
         double index = nbModel.predict(v);
-        modelIndex = (int)index;
+        modelIndex = (int) index;
         System.out.println("the model index is " + index);
 //		Vector vRes = nbModel.predictProbabilities(v);
 //		System.out.println("问题模板分类【0】概率："+vRes.toArray()[0]);
@@ -206,9 +209,10 @@ public class Question2ModelString {
 
     /**
      * 加载问题模板 == 分类器标签
+     *
      * @return
      */
-    public  Map<Double, String> loadQuestionsPattern() {
+    public Map<Double, String> loadQuestionsPattern() {
         Map<Double, String> questionsPattern = new HashMap<Double, String>();
         try {
             JSONObject jsonObject = LoadJsonUtil.getJsonObject("classify/classification.json");
@@ -216,9 +220,9 @@ public class Question2ModelString {
             String classficationsString = jsonObject.getJSONArray("classifications").toString();
             //解析成字符串数组
             List<Classification> classifications = JSONArray.parseArray(classficationsString, Classification.class);
-            for (Classification classification: classifications){
+            for (Classification classification : classifications) {
                 //放进分类模板
-                questionsPattern.put((double)classification.getId(), classification.getValue());
+                questionsPattern.put((double) classification.getId(), classification.getValue());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -230,10 +234,11 @@ public class Question2ModelString {
      * Spark朴素贝叶斯(naiveBayes)
      * 对特定的模板进行加载并分类
      * 欲了解Spark朴素贝叶斯，可参考地址：https://blog.csdn.net/appleyk/article/details/80348912
+     *
      * @return
      * @throws Exception
      */
-    public  NaiveBayesModel loadClassifierModel() throws Exception {
+    public NaiveBayesModel loadClassifierModel() throws Exception {
 
         /**
          * 生成Spark对象
@@ -278,12 +283,12 @@ public class Question2ModelString {
         questionFileNames.add("questionWorkIn.json");
 
         //加载所有问题模型
-        for (String questionFileName: questionFileNames
-             ) {
+        for (String questionFileName : questionFileNames
+        ) {
             QuestionList questionList = new QuestionList(questionRootDir + questionFileName);
             List<Question> questions = questionList.getQuestions();
             //将问题列表转换成向量
-            for (Question q: questions){
+            for (Question q : questions) {
                 double[] array = sentenceToArrays(q.getValue());
                 //标签是问题类型
                 LabeledPoint train_one = new LabeledPoint(questionList.getQuestionType(), Vectors.dense(array));
@@ -312,7 +317,7 @@ public class Question2ModelString {
 
     }
 
-    public  String queryExtenstion(String queryPattern) {
+    public String queryExtenstion(String queryPattern) {
         // 句子还原
         Set<String> set = abstractMap.keySet();
         for (String key : set) {

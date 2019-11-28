@@ -87,4 +87,5 @@ public class Vocabulary {
             System.out.println(v.id + v.value + v.type);
         }
     }
+
 }
