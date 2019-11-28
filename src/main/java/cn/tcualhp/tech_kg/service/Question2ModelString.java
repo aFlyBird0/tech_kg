@@ -21,6 +21,7 @@ import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.regression.LabeledPoint;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -201,9 +202,6 @@ public class Question2ModelString {
         double index = nbModel.predict(v);
         modelIndex = (int) index;
         System.out.println("the model index is " + index);
-//		Vector vRes = nbModel.predictProbabilities(v);
-//		System.out.println("问题模板分类【0】概率："+vRes.toArray()[0]);
-//		System.out.println("问题模板分类【13】概率："+vRes.toArray()[13]);
         return questionsPattern.get(index);
     }
 
@@ -277,10 +275,11 @@ public class Question2ModelString {
 
 
         final String questionRootDir = "/questions/";
-        //问题列表文件名
-        final List<String> questionFileNames = new ArrayList<>();
-        questionFileNames.add("questionPublish.json");
-        questionFileNames.add("questionWorkIn.json");
+        /**
+         * 问题列表
+         */
+        File questionDir = new File("src/main/resources/questions");
+        String[] questionFileNames = questionDir.list();
 
         //加载所有问题模型
         for (String questionFileName : questionFileNames

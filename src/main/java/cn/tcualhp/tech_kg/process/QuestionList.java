@@ -66,7 +66,7 @@ public class QuestionList {
     }
 
     public static void main(String[] args) throws IOException {
-        QuestionList questionList = new QuestionList("questions/questionPublish.json");
+        QuestionList questionList = new QuestionList("questions/00questionPublish.json");
         for (Question q : questionList.questions) {
             System.out.println(q);
         }
