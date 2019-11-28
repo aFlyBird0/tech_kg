@@ -20,6 +20,7 @@ import org.apache.spark.mllib.linalg.Vector;
 import org.apache.spark.mllib.linalg.Vectors;
 import org.apache.spark.mllib.regression.LabeledPoint;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.*;
 
@@ -286,15 +287,20 @@ public class QuestionServiceDemo {
 
         final String questionRootDir = "/questions/";
         //问题列表文件名
-        final List<String> questionFileNames = new ArrayList<>();
-        questionFileNames.add("questionPublish.json");
-        questionFileNames.add("questionWorkIn.json");
-        questionFileNames.add("questionCooperation.json");
-        questionFileNames.add("questionExpertKeywords.json");
-        questionFileNames.add("questionUnitExperts.json");
-        questionFileNames.add("questionUnitPapers.json");
-        questionFileNames.add("questionYearKeywords.json");
+//        final List<String> questionFileNames = new ArrayList<>();
+//        questionFileNames.add("00questionPublish.json");
+//        questionFileNames.add("01questionWorkIn.json");
+//        questionFileNames.add("02questionCooperation.json");
+//        questionFileNames.add("06questionExpertKeywords.json");
+//        questionFileNames.add("05questionUnitExperts.json");
+//        questionFileNames.add("04questionUnitPapers.json");
+//        questionFileNames.add("03questionYearKeywords.json");
 
+        /**
+         * 问题列表
+         */
+        File questionDir = new File("src/main/resources/questions");
+        String[] questionFileNames = questionDir.list();
 
         //加载所有问题模型
         for (String questionFileName : questionFileNames
