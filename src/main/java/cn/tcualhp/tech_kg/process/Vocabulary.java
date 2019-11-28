@@ -7,7 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author jerry
@@ -20,15 +21,12 @@ import java.util.*;
 @NoArgsConstructor
 public class Vocabulary {
     /**
-     * 注意这个id没用，没用，没用
-     * 因为会有重复
-     * 并且后面的id会重新指定
-     * 因为id关系到数组长度
+     * 词的 id 唯一
      */
     private long id;
 
     /**
-     * 词的值，唯一，去重依据
+     * 词的值
      */
     private String value;
 
@@ -43,47 +41,25 @@ public class Vocabulary {
      * @return  list 全部词汇的 list
      * @throws IOException
      */
-    public Set<Vocabulary> getVocabularySet(String filename) throws IOException {
+    public List<Vocabulary> getVocabularyList(String filename) throws IOException {
         JSONObject jsonObject = LoadJsonUtil.getJsonObject(filename);
         JSONArray vocabulary = jsonObject.getJSONArray("vocabulary");
-        Set<Vocabulary> vocabularies = new HashSet<>();
         List<Vocabulary> vocabularyList = new ArrayList<>();
+//        HashMap<Integer,String> hashMap = new HashMap();
         for (int i = 0;i < vocabulary.size();i++) {
             Vocabulary v = new Vocabulary();
             v.id = i + 1;
             v.value = vocabulary.getJSONObject(i).getString("value");
             v.type = vocabulary.getJSONObject(i).getString("type");
-            vocabularies.add(v);
+            vocabularyList.add(v);
         }
-        return vocabularies;
-    }
-
-    /**
-     * 判断是否重复，词就是唯一值
-     * @param o
-     * @return
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Vocabulary that = (Vocabulary) o;
-        return value.equals(that.value);
-    }
-
-    /**
-     * 哈希，和id与type无关
-     * @return
-     */
-    @Override
-    public int hashCode() {
-        return Objects.hash(value);
+        return vocabularyList;
     }
 
     public static void main(String[] args) throws IOException {
         Vocabulary vocabulary = new Vocabulary();
-        Set<Vocabulary>  vocabularies=  vocabulary.getVocabularySet("vocabulary/vocabulary.json");
-        for (Vocabulary v : vocabularies) {
+        List<Vocabulary> list =  vocabulary.getVocabularyList("vocabulary/vocabulary.json");
+        for (Vocabulary v : list) {
             System.out.println(v.id + v.value + v.type);
         }
     }

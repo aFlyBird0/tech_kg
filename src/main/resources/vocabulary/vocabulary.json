@@ -6,6 +6,26 @@
       "type": "v"
     },
     {
+      "id": 2,
+      "value": "无线网络",
+      "type": "n"
+    },
+    {
+      "id": 3,
+      "value": "自适应",
+      "type": "n"
+    },
+    {
+      "id": 4,
+      "value": "算法",
+      "type": "n"
+    },
+    {
+      "id": 5,
+      "value": "算法",
+      "type": "n"
+    },
+    {
       "id": 6,
       "value": "哪些",
       "type": "a"

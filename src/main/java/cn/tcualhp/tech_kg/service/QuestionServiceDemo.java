@@ -112,10 +112,23 @@ public class QuestionServiceDemo {
         for (Term term : terms) {
             String word = term.word;
             System.out.println(term.toString());
-            if (TermUtil.isWordNatureEquals(term, "nr") && nrCount == 0) { //nr 人名
-                abstractQuery += "nr";
-                abstractMap.put("nr", word);
+            if (TermUtil.isWordNatureEquals(term, "nm")) {        //nm 电影名
+                abstractQuery += "nm ";
+                abstractMap.put("nm", word);
+            } else if (TermUtil.isWordNatureEquals(term, "nr") && nrCount == 0) { //nr 人名
+                abstractQuery += "nnt";
+                abstractMap.put("nnt", word);
                 nrCount++;
+            } else if (TermUtil.isWordNatureEquals(term, "nnr") && nrCount == 1) { //nr 人名 再出现一次，改成nnr
+                abstractQuery += "nnr ";
+                abstractMap.put("nnr", word);
+                nrCount++;
+            } else if (TermUtil.isWordNatureEquals(term, "x")) {  //x  评分
+                abstractQuery += "x ";
+                abstractMap.put("x", word);
+            } else if (TermUtil.isWordNatureEquals(term, "ng")) { //ng 类型
+                abstractQuery += "ng ";
+                abstractMap.put("ng", word);
             } else {
                 abstractQuery += word + " ";
             }
@@ -132,7 +145,7 @@ public class QuestionServiceDemo {
         Map<String, Integer> vocabulary = new HashMap<String, Integer>();
         int index = 1;
         try {
-            Set<Vocabulary> vocabularies = new Vocabulary().getVocabularySet("/vocabulary/vocabulary.json");
+            List<Vocabulary> vocabularies = new Vocabulary().getVocabularyList("/vocabulary/vocabulary.json");
             for (Vocabulary v:vocabularies
                  ) {
                 vocabulary.put(v.getValue(), index);
@@ -346,10 +359,6 @@ public class QuestionServiceDemo {
             questionServiceDemo.analyQuery("李鹤鹏工作于哪个单位");
             System.out.println("");
             questionServiceDemo.analyQuery("李鹤鹏在哪里");
-            System.out.println("");
-            questionServiceDemo.analyQuery("有哪些论文是李鹤鹏写的");
-            System.out.println("");
-            questionServiceDemo.analyQuery("李鹤鹏工作的地方在哪里");
             System.out.println("");
         } catch (Exception e) {
             e.printStackTrace();
