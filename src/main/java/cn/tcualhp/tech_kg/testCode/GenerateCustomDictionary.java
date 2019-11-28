@@ -134,7 +134,7 @@ public class GenerateCustomDictionary {
 
 
     public static void main(String[] args) {
-        GenerateCustomDictionary generateCustomDictionary = new GenerateCustomDictionary();
-        generateCustomDictionary.generateDictionary(generateCustomDictionary.jsonObject);
+//        GenerateCustomDictionary generateCustomDictionary = new GenerateCustomDictionary();
+//        generateCustomDictionary.generateDictionary(generateCustomDictionary.jsonObject);
     }
 }
