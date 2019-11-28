@@ -52,7 +52,7 @@ public class GenerateCustomDictionary {
             if (unitName != "") {
                 String[] unitNames = unitName.split(";");
                 for (String s : unitNames) {
-                    if (s != ";" && s!= ""){
+                    if (s != ";" && s != "") {
                         unitNameSet.add(s);
                     }
                 }
@@ -64,7 +64,7 @@ public class GenerateCustomDictionary {
             if (keyword != "") {
                 String[] keywords = keyword.split(";");
                 for (String s : keywords) {
-                    if (s != ";" && s!= ""){
+                    if (s != ";" && s != "") {
                         keywordsSet.add(s);
                     }
                 }
@@ -78,9 +78,11 @@ public class GenerateCustomDictionary {
             int count = 0;
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             for (String s : expertNameSet) {
-                bufferedWriter.write(s + "\r\n");
-                bufferedWriter.flush();
-                count++;
+                if (!s.contains(" ")) {
+                    bufferedWriter.write(s + "\r\n");
+                    bufferedWriter.flush();
+                    count++;
+                }
             }
             bufferedWriter.close();
             System.out.println(count);
@@ -96,9 +98,11 @@ public class GenerateCustomDictionary {
             int count = 0;
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             for (String s : keywordsSet) {
-                bufferedWriter.write(s + "\r\n");
-                bufferedWriter.flush();
-                count++;
+                if (!s.contains(" ")) {
+                    bufferedWriter.write(s + " wk\r\n");
+                    bufferedWriter.flush();
+                    count++;
+                }
             }
             bufferedWriter.close();
             System.out.println(count);
@@ -114,9 +118,11 @@ public class GenerateCustomDictionary {
             int count = 0;
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
             for (String s : unitNameSet) {
-                bufferedWriter.write(s + "\r\n");
-                bufferedWriter.flush();
-                count++;
+                if (!s.contains(" ")) {
+                    bufferedWriter.write(s + "\r\n");
+                    bufferedWriter.flush();
+                    count++;
+                }
             }
             bufferedWriter.close();
             System.out.println(count);
