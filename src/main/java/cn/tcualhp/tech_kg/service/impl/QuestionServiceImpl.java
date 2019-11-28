@@ -46,6 +46,7 @@ public class QuestionServiceImpl implements QuestionService {
         int modelIndex = Integer.parseInt(reStrings.get(0));
         String answer = null;
         String expertName = "";
+        String expertName2 = "";
         Set<PaperNode> paperNodes = null;
         List<ExpertNode> expertNodes = null;
         ExpertNode expertNode;
@@ -99,6 +100,24 @@ public class QuestionServiceImpl implements QuestionService {
                 expertNode = expertNodeRepo.getExpertNodesByName(expertName).get(0);
                 unitNodes = expertNode.getUnitNodes();
                 answer = unitNodes.toString();
+            case 2:
+                /**
+                 * 抽象模板详见classify/classifications.json
+                 * 这里最好把case都封装成函数，现在太乱了
+                 * 比如所有的case的变量不能重复定义，很坑
+                 * 这里是 2 nr n2r 合作论文
+                 */
+                expertName = reStrings.get(1);
+                expertName2 = reStrings.get(2);
+                answer = "service待写";
+            case 3:
+                answer = "待写";
+            case 4:
+                answer = "待写";
+            case 5:
+                answer = "待写";
+            case 7:
+                answer = "待写";
             default:
                 break;
         }

@@ -114,11 +114,44 @@ public class Question2ModelString {
         for (Term term : terms) {
             String word = term.word;
             System.out.println(term.toString());
-            if (TermUtil.isWordNatureEquals(term, "nr") && nrCount == 0) { //nr 人名
+            if (TermUtil.isWordNatureEquals(term, "nr") && nrCount == 0) {
+                /**
+                 *  nr 人名
+                 */
                 abstractQuery += "nr";
                 abstractMap.put("nr", word);
                 nrCount++;
-            } else {
+            }else if (TermUtil.isWordNatureEquals(term, "nr") && nrCount == 1){
+                /**
+                 * 第二次出现人名
+                 */
+                abstractQuery += "n2r";
+                abstractMap.put("n2r", word);
+                nrCount++;
+            }else if (TermUtil.isWordNatureEquals(term, "m")){
+                /**
+                 * 数字
+                 * 注意目前是用作年份，但也许会和年龄冲突
+                 * 这个问题可能需要用分类器的不同问题模板来弥补
+                 */
+                abstractQuery += "m";
+                abstractMap.put("m", word);
+            }else if (TermUtil.isWordNatureEquals(term, "wk")){
+                /**
+                 * 自定义关键词
+                 */
+                abstractQuery += "wk";
+                abstractMap.put("wk", word);
+            }else if (TermUtil.isWordNatureEquals(term, "nt") || TermUtil.isWordNatureEquals(term, "ntu")
+                    || TermUtil.isWordNatureEquals(term, "ntc") || TermUtil.isWordNatureEquals(term, "nth")
+                    || TermUtil.isWordNatureEquals(term, "nto") || TermUtil.isWordNatureEquals(term, "nts")){
+                /**
+                 * 单位，包含很多单位，所以自定义一个词性
+                 */
+                abstractQuery += "unit";
+                abstractMap.put("unit", word);
+            }
+            else {
                 abstractQuery += word + " ";
             }
         }
