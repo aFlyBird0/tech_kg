@@ -47,6 +47,7 @@ public class Vocabulary {
         JSONObject jsonObject = LoadJsonUtil.getJsonObject(filename);
         JSONArray vocabulary = jsonObject.getJSONArray("vocabulary");
         Set<Vocabulary> vocabularies = new HashSet<>();
+        List<Vocabulary> vocabularyList = new ArrayList<>();
         for (int i = 0;i < vocabulary.size();i++) {
             Vocabulary v = new Vocabulary();
             v.id = i + 1;
