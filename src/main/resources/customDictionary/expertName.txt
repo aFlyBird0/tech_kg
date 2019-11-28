@@ -9,7 +9,6 @@
 赵维
 周杭
 刘金波
-Sage Arbor
 常青
 王羚入
 胡蓉
@@ -212,8 +211,6 @@ JANE
 张俊龙
 张环曦
 刘健
-Mohamed Abd-Elghany
-OUYANG Chao-jun
 包志强
 赫慧
 王莉
@@ -345,7 +342,6 @@ A.K.SINGH
 崔佳山
 吴水金
 刘克建
-CHEN Wenlong
 刘建国
 吴俊
 刘友兵
@@ -414,10 +410,8 @@ CHEN Wenlong
 王馨欣
 陈远
 陈保
-Yanan Ge
 李业成
 卞勤虎
-CHEN Jianfeng
 王紫鹏
 俞满昌
 刘冲
@@ -456,7 +450,6 @@ CHEN Jianfeng
 刘燚
 黄安贻
 黄锦华
-Ni Feng
 陈滢滢
 曾言
 吴炎
@@ -536,7 +529,6 @@ Ni Feng
 薛洪广
 史俊祎
 黄一入
-Flora Zhao
 杨晓兰
 蔡素妹
 周天寒
@@ -632,7 +624,6 @@ Flora Zhao
 张子龙
 朱宇光
 吴丽响
-Feng-Xia Wang
 朱邦芬
 唐昊天
 蔡颖欣
@@ -956,7 +947,6 @@ Chris
 胡冬青
 张振越
 曾宪云
-Wang Xiaoli
 张秀凤
 李国华
 刘志恒
@@ -1020,7 +1010,6 @@ Wang Xiaoli
 本刊讯
 俞怡华
 田晓娜
-Na LI
 傅虹
 高小娥
 马建生
@@ -1056,7 +1045,6 @@ Na LI
 曹亮
 罗照春
 覃洲雷
-Minyou He
 赵玉振
 靳光明
 刘闯
@@ -1324,7 +1312,6 @@ Minyou He
 汤桦
 曾进
 龚文广
-Diane M.Dennis
 陈祥华
 曹姣姣
 高新喜
@@ -1577,7 +1564,6 @@ Diane M.Dennis
 林雪松
 高世仰
 安璞
-You Jiang
 杭瑜瑜
 吕亚莉
 姜晓琳
@@ -1602,7 +1588,6 @@ You Jiang
 乔郑磊
 潘萌甜
 刘如
-Ed Spence
 叶群
 张斌
 高继敬
@@ -1817,7 +1802,6 @@ Grace
 张维合
 黄光球
 王旖磊
-Laura Lorente-Gea
 张代明
 陆红霞
 冯宇玮
@@ -1864,7 +1848,6 @@ Laura Lorente-Gea
 宋阳
 郑绍勇
 公衍文
-Byung Woog Kang
 周宗宝
 张宜平
 梁玉莹
@@ -2113,7 +2096,6 @@ Byung Woog Kang
 申爱萍
 侯杰
 马骏
-CHEN Hu
 冯光勇
 杨建平
 龙娟
@@ -2303,8 +2285,6 @@ Yvette
 付爱
 王正军
 阿紫
-Basturk O
-Rongchang Luo
 向寿培
 贺美珠
 贾瑞
@@ -2375,7 +2355,6 @@ A.皮雷
 邱仁宗
 林华婷
 郑志凡
-Veniamin D.Kubenko
 杨同球
 史君彦
 雷锦桂
@@ -2415,7 +2394,6 @@ Veniamin D.Kubenko
 老车
 尤云桂
 农小丽
-Yuping Li
 孙翌
 徐剑安
 骆伟栋
@@ -2429,7 +2407,6 @@ Yuping Li
 胥可
 梁栋
 柏红梅
-Ting Liu
 赵源
 王莉萍
 赵云
@@ -2461,7 +2438,6 @@ Ting Liu
 王利
 孙德乐
 孙宝海
-M. S. Sunila
 陈予朋
 张学明
 高雪艳
@@ -2480,7 +2456,6 @@ M. S. Sunila
 陈桂清
 田财兴
 王清才
-Kazuhiro Yamanaka
 陈鲜霞
 李文婷
 张晓阳
@@ -2796,9 +2771,7 @@ Kazuhiro Yamanaka
 历铮
 段雯娟
 赵国荣
-Basim O.Hasan
 谭磊
-Yuan Zhong
 李辰
 彭昭宣
 郝晓平
@@ -2829,7 +2802,6 @@ Yuan Zhong
 孟晓辉
 刘芳华
 陈长兴
-Arlie Sterling
 徐翠
 王瑾
 梁胜波
@@ -2856,7 +2828,6 @@ Arlie Sterling
 刘殿宇
 曹婧
 陈志兴
-Yun Chen
 黄飚
 丁秀莲
 陈忠
@@ -2977,7 +2948,6 @@ Yun Chen
 彭永强
 刘扬
 姚凯
-Jin-An Zhao
 刘婧珏
 李丹丹
 郭丽丽
@@ -3115,7 +3085,6 @@ Jin-An Zhao
 刘晓敏
 张潜
 卢蔚瑶
-Neison Hernandez
 吴凡吉
 于寅生
 王小勤
@@ -3248,8 +3217,6 @@ Neison Hernandez
 庞广生
 田朝辉
 刘伟铭
-Siyu CHEN
-Frédéric Dias
 常守信
 王霞
 金吉梅
@@ -3257,7 +3224,6 @@ Frédéric Dias
 郝素花
 张倩
 王梦诗
-Yuan-Yuan Li
 赵亚丽
 徐振阳
 安彪
@@ -3283,7 +3249,6 @@ Yuan-Yuan Li
 孙学科
 朱奇星
 翟国栋
-ZHANG Chao
 布艺鹏
 吕秀华
 谭伟超
@@ -3508,7 +3473,6 @@ ZHANG Chao
 金乃
 詹介秋
 于华
-Wenyu Zheng
 陈菊
 王磊
 杨茂江
@@ -3530,7 +3494,6 @@ Wenyu Zheng
 王飞
 张燕
 石桂连
-Lin CHEN
 祝秀芳
 任高宏
 张凤
@@ -3665,7 +3628,6 @@ Lin CHEN
 李晓晋
 张广久
 石光
-Fengxia GUO
 岳文辉
 李明亮
 胡献国
@@ -3724,7 +3686,6 @@ Fengxia GUO
 侯雅静
 丁昊
 游继存
-FENG Aichun
 丁明
 张华
 戴岐康
@@ -3734,7 +3695,6 @@ FENG Aichun
 沈玮
 龚蒙
 崔锁明
-HAO Qingqing
 沈洪雷
 徐嵩淼
 蒲在毅
@@ -3814,7 +3774,6 @@ HAO Qingqing
 伊芙·佩尔
 王立
 季朝亮
-Vikas Sood
 赵睿
 武静
 于善
@@ -4082,7 +4041,6 @@ Vikas Sood
 陈小中
 李燕村
 朱玉彦
-Jerome Johnston
 李广州
 徐子冰
 石吟
@@ -4176,7 +4134,6 @@ Jerome Johnston
 张诗琪
 张梦霞
 张梦真
-DONG Fang
 渠长威
 吴江莲
 王柱林
@@ -4191,7 +4148,6 @@ DONG Fang
 郭建伟
 钱卫力
 吴亚红
-Moroder P
 冯需
 薛浩
 李雪梅
@@ -4205,7 +4161,6 @@ Moroder P
 郑新梅
 陈宇翔
 郝炜
-冯    军1汤文明2曹剑剑3余    瑛1#*
 李云武
 田胜雄
 邱文新
@@ -4360,7 +4315,6 @@ Moroder P
 王红欢
 梁运来
 郑立强
-Qingming Luo
 顾其俊
 姜晓星
 余锡煌
@@ -4405,7 +4359,6 @@ Qingming Luo
 余峰彬
 段艳红
 刘毅
-Enzo deLaurentiis
 金鑫
 雷发荣
 李秋燕
@@ -4427,7 +4380,6 @@ Enzo deLaurentiis
 许韵婷
 任凤霞
 刘诚
-HUAI Xiao-Wei
 邓红兰
 季玉兰
 杨松林
@@ -4485,8 +4437,6 @@ HUAI Xiao-Wei
 程晓喜
 罗桑念扎
 尤大海
-Yaming Yu
-XU Xin
 王彧
 陈晓霞
 孙海燕
@@ -4548,7 +4498,6 @@ XU Xin
 刘宗奎
 王创业
 郑琳
-Yuko Miyagoe-Suzuki
 丰云雷
 邓建林
 高凌卉
@@ -4577,7 +4526,6 @@ Yuko Miyagoe-Suzuki
 杨婷婷
 王鹏玲
 赵福荣
-Ravindrarajah R
 伍文燕
 林特
 陈吉云
@@ -4589,7 +4537,6 @@ Ravindrarajah R
 本刊整理
 张春朋
 邵明法
-Abdelkader Intissar
 冯冬霞
 秦竹
 孔喜梅
@@ -4615,7 +4562,6 @@ Abdelkader Intissar
 陈举平
 及跃武
 华林
-Xian-Tao Ma
 于坤朋
 管斌
 崔华胜
@@ -4742,15 +4688,12 @@ Xian-Tao Ma
 袁丽霞
 冯骏
 刘廷玉
-Dong-wei XU
 朱翔
 李月香
 罗单
 常海东
 任玉明
 黎淑贞
-Xiao-Li Miao
-Endre Gy.Tth
 毕素清
 杨永霞
 徐庭洪
