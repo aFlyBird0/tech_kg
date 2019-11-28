@@ -63,12 +63,6 @@ public class QuestionList {
          */
         this.questionType = Integer.parseInt(jsonObject.get("questionType").toString());
 
-        /**
-         * bugs fixed
-         * ？？？？？？？？？
-         * 没看懂这波操作，无返回值。
-         * 已按照方法名逻辑做修改
-         */
     }
 
     public static void main(String[] args) throws IOException {

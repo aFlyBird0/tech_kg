@@ -101,17 +101,24 @@ public class QuestionServiceDemo {
     }
 
     public String queryAbstract(String querySentence) {
-
-        // 句子抽象化
+        /**
+         * 句子抽象化
+         */
         Segment segment = HanLP.newSegment().enableCustomDictionary(true).enableNameRecognize(true);
         List<Term> terms = segment.seg(querySentence);
         String abstractQuery = "";
         abstractMap = new HashMap<String, String>();
-        int nrCount = 0; //nr 人名词性这个 词语出现的频率
+        /**
+         * nr 人名词性这个 词语出现的频率
+         */
+        int nrCount = 0;
         for (Term term : terms) {
             String word = term.word;
             System.out.println(term.toString());
-            if (TermUtil.isWordNatureEquals(term, "nr") && nrCount == 0) { //nr 人名
+            if (TermUtil.isWordNatureEquals(term, "nr") && nrCount == 0) {
+                /**
+                 *  nr 人名
+                 */
                 abstractQuery += "nr";
                 abstractMap.put("nr", word);
                 nrCount++;
@@ -213,12 +220,16 @@ public class QuestionServiceDemo {
         Map<Double, String> questionsPattern = new HashMap<Double, String>();
         try {
             JSONObject jsonObject = LoadJsonUtil.getJsonObject("classify/classification.json");
-            //获取分类数组的字符串
+            /**
+             * 获取分类数组的字符串
+             */
             String classficationsString = jsonObject.getJSONArray("classifications").toString();
             //解析成字符串数组
             List<Classification> classifications = JSONArray.parseArray(classficationsString, Classification.class);
             for (Classification classification : classifications) {
-                //放进分类模板
+                /**
+                 * 放进分类模板
+                 */
                 questionsPattern.put((double) classification.getId(), classification.getValue());
             }
         } catch (IOException e) {
@@ -278,6 +289,12 @@ public class QuestionServiceDemo {
         final List<String> questionFileNames = new ArrayList<>();
         questionFileNames.add("questionPublish.json");
         questionFileNames.add("questionWorkIn.json");
+        questionFileNames.add("questionCooperation.json");
+        questionFileNames.add("questionExpertKeywords.json");
+        questionFileNames.add("questionUnitExperts.json");
+        questionFileNames.add("questionUnitPapers.json");
+        questionFileNames.add("questionYearKeywords.json");
+
 
         //加载所有问题模型
         for (String questionFileName : questionFileNames

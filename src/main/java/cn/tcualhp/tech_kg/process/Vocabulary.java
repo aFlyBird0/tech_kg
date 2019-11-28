@@ -39,8 +39,9 @@ public class Vocabulary {
 
     /**
      * 返回指定词汇 json 文件下的词汇的 list
+     *
      * @param filename 词汇文件名
-     * @return  list 全部词汇的 list
+     * @return list 全部词汇的 list
      * @throws IOException
      */
     public Set<Vocabulary> getVocabularySet(String filename) throws IOException {
@@ -48,7 +49,7 @@ public class Vocabulary {
         JSONArray vocabulary = jsonObject.getJSONArray("vocabulary");
         Set<Vocabulary> vocabularies = new HashSet<>();
         List<Vocabulary> vocabularyList = new ArrayList<>();
-        for (int i = 0;i < vocabulary.size();i++) {
+        for (int i = 0; i < vocabulary.size(); i++) {
             Vocabulary v = new Vocabulary();
             v.id = i + 1;
             v.value = vocabulary.getJSONObject(i).getString("value");
@@ -60,19 +61,25 @@ public class Vocabulary {
 
     /**
      * 判断是否重复，词就是唯一值
+     *
      * @param o
      * @return
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Vocabulary that = (Vocabulary) o;
         return value.equals(that.value);
     }
 
     /**
      * 哈希，和id与type无关
+     *
      * @return
      */
     @Override
@@ -82,7 +89,7 @@ public class Vocabulary {
 
     public static void main(String[] args) throws IOException {
         Vocabulary vocabulary = new Vocabulary();
-        Set<Vocabulary>  vocabularies=  vocabulary.getVocabularySet("vocabulary/vocabulary.json");
+        Set<Vocabulary> vocabularies = vocabulary.getVocabularySet("vocabulary/vocabulary.json");
         for (Vocabulary v : vocabularies) {
             System.out.println(v.id + v.value + v.type);
         }

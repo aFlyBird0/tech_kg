@@ -1,8 +1,6 @@
 package cn.tcualhp.tech_kg.neo4jRepo;
 
 import cn.tcualhp.tech_kg.model.Neo4jNode.PaperNode;
-import com.hankcs.hanlp.seg.common.Term;
-import org.neo4j.ogm.annotation.NodeEntity;
 import org.springframework.data.neo4j.repository.Neo4jRepository;
 import org.springframework.data.repository.query.Param;
 
@@ -69,4 +67,16 @@ public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
      */
     PaperNode getPaperNodeNLPBySummaryContains(@Param("paperAbstract") String summary);
 
+    /**
+     * 通过论文的 作者姓名，获取论文的信息
+     * @param firstAuthor 论文作者
+     * @return
+     */
+    List<PaperNode> getPaperNodeByFirstAuthor(@Param("firstAuthor") String firstAuthor);
+
+    List<PaperNode> getPaperNodeBySecondAuthor(@Param("secondAuthor") String secondAuthor);
+
+    List<PaperNode> getPaperNodeByThirdAuthor(@Param("thirdAuthor") String thirdAuthor);
+
+    List<PaperNode> getPaperNodeByFourthAuthor(@Param("fourthAuthor") String fourthAuthor);
 }

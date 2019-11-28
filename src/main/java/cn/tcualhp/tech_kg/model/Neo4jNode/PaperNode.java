@@ -67,10 +67,52 @@ public class PaperNode {
     private String summary;
 
     /**
+     * 论文第一作者
+     */
+    @Property(name = "first_author")
+    private String firstAuthor;
+
+    /**
      * 论文第一作者 code 号
      */
     @Property(name = "first_author_code")
     private String firstAuthorCode;
+
+    /**
+     * 论文第二作者
+     */
+    @Property(name = "second_author")
+    private String secondAuthor;
+
+    /**
+     * 论文第二作者 code 号
+     */
+    @Property(name = "second_author_code")
+    private String secondAuthorCode;
+
+    /**
+     * 论文第三作者
+     */
+    @Property(name = "third_author")
+    private String thirdAuthor;
+
+    /**
+     * 论文第三作者 code 号
+     */
+    @Property(name = "third_author_code")
+    private String thirdAuthorCode;
+
+    /**
+     * 论文第四作者
+     */
+    @Property(name = "fourth_author")
+    private String fourthAuthor;
+
+    /**
+     * 论文第四作者 code 号
+     */
+    @Property(name = "fourth_author_code")
+    private String fourthAuthorCode;
 
     /**
      * 发表入方向，即作者
@@ -81,7 +123,9 @@ public class PaperNode {
      * @description //TODO
      * @date 14:53 2019/11/4
      **/
-    /**防止序列化循环*/
+    /**
+     * 防止序列化循环
+     */
     @JsonIgnore
     @Relationship(type = "write", direction = Relationship.INCOMING)
     private Set<ExpertNode> expertNodes;

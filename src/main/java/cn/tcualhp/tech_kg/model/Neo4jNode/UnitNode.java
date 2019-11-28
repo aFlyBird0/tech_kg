@@ -4,10 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.neo4j.ogm.annotation.GeneratedValue;
-import org.neo4j.ogm.annotation.Id;
-import org.neo4j.ogm.annotation.Property;
-import org.neo4j.ogm.annotation.Relationship;
+import org.neo4j.ogm.annotation.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -20,18 +17,21 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@NodeEntity(label = "Unit")
 public class UnitNode {
     @Id
     @GeneratedValue
     private Long nodeId;
 
     @Property(name = "name")
-    private String name;
+    private String unitName;
 
     /**
      * 属于入方向，即拥有
      */
-    //防止序列化循环
+    /**
+     * 防止序列化循环
+     */
     @JsonIgnore
     @Relationship(type = "expert_belong_to_unit", direction = Relationship.INCOMING)
     private Set<ExpertNode> expertNodes;
@@ -47,7 +47,7 @@ public class UnitNode {
     public String toString() {
         return "UnitNode{" +
                 "nodeId=" + nodeId +
-                ", name='" + name + '\'' +
+                ", name='" + unitName + '\'' +
                 ", expertNodes=" + "DO NOT PRINT" +
                 '}';
     }

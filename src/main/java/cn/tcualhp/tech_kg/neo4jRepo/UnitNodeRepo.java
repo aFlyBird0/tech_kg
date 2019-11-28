@@ -12,10 +12,10 @@ import java.util.List;
 public interface UnitNodeRepo extends Neo4jRepository<UnitNode, Long> {
 
     /**
-     *
-     * @param unitNode
-     * @return
+     *  通过 unitName 查询 UnitNode 的信息
+     * @param unitName 单位名称
+     * @return  list 单位的 unitNode
      */
-    List<UnitNode> getUnitNodeByUnitNameContains(@Param("unitNode") String unitNode);
+    List<UnitNode> getUnitNodeByUnitNameContains(@Param("unitName") String unitName);
 
 }

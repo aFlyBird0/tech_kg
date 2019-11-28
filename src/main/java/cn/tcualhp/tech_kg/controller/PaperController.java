@@ -5,7 +5,6 @@ import cn.tcualhp.tech_kg.model.Neo4jNode.ExpertNode;
 import cn.tcualhp.tech_kg.model.Neo4jNode.PaperNode;
 import cn.tcualhp.tech_kg.neo4jRepo.ExpertNodeRepo;
 import cn.tcualhp.tech_kg.neo4jRepo.PaperNodeRepo;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author lihepeng
@@ -197,6 +193,47 @@ public class PaperController {
             }
         }
         return new Response().success(allPaperNodes);
+    }
+
+
+    /**
+     *
+     */
+    @PostMapping("/getPapersByExpertName")
+    public Response getPapersByExpertName(@RequestBody Map<String, String> map) {
+        String expertName = map.get("expertName");
+        if (StringUtils.isEmpty(expertName)) {
+            return new Response().failure(4001, "参数缺失");
+        }
+        List<List<PaperNode>> paperNodes = new LinkedList<>();
+        paperNodes.add(paperNodeRepo.getPaperNodeByFirstAuthor(expertName));
+        paperNodes.add(paperNodeRepo.getPaperNodeBySecondAuthor(expertName));
+        paperNodes.add(paperNodeRepo.getPaperNodeByThirdAuthor(expertName));
+        paperNodes.add(paperNodeRepo.getPaperNodeByFourthAuthor(expertName));
+
+        List<PaperNode> paperNodeList = new ArrayList<>();
+        for (List list : paperNodes) {
+            while (!list.isEmpty()) {
+                paperNodeList.add(list.indexOf(0));
+            }
+        }
+
+        return new Response().success(paperNodes);
+    }
+
+    /**
+     * 通过多个专家姓名，查询是否有一同发表某论文
+     * @param map
+     * @return
+     */
+    @PostMapping("/getPapersByExpertNames")
+    public Response getPapersByExpertNames(@RequestBody Map<String, List<String>> map) {
+        List<String> experts = map.get("expertsNames");
+        if (StringUtils.isEmpty(experts)) {
+            return new Response().failure(4001, "参数缺失");
+        }
+        List<PaperNode> paperNodes1 = paperNodeRepo.get(summary);
+        return new Response().success(paperNodes);
     }
 
 }
