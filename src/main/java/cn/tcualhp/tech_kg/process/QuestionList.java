@@ -5,7 +5,6 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import java.io.IOException;
 import java.util.List;
@@ -55,17 +54,26 @@ public class QuestionList {
         String questionDescription = (String) jsonObject.get("questionDescription");
         this.questionDescription = questionDescription;
 
-        //获取问题类型
-        //之前漏了一行导致分类器所有问题类型都是默认0
-        //导致分类结果都是类型0
-        //还好一下子就找到了
+        /**
+         * 获取问题类型
+         * 之前漏了一行导致分类器所有问题类型都是默认0
+         * 导致分类结果都是类型 0
+         * 还好一下子就找到了
+         *
+         */
         this.questionType = Integer.parseInt(jsonObject.get("questionType").toString());
 
+        /**
+         * bugs fixed
+         * ？？？？？？？？？
+         * 没看懂这波操作，无返回值。
+         * 已按照方法名逻辑做修改
+         */
     }
 
     public static void main(String[] args) throws IOException {
         QuestionList questionList = new QuestionList("questions/questionPublish.json");
-        for (Question q : questionList.getQuestions()) {
+        for (Question q : questionList.questions) {
             System.out.println(q);
         }
     }
