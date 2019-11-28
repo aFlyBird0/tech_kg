@@ -197,7 +197,7 @@ public class PaperController {
 
 
     /**
-     *
+     *  调用多个方法，检查 paperNode 的每个作者属性，最后返回专家的节点
      */
     @PostMapping("/getPapersByExpertName")
     public Response getPapersByExpertName(@RequestBody Map<String, String> map) {
@@ -222,7 +222,7 @@ public class PaperController {
     }
 
     /**
-     * 通过多个专家姓名，查询是否有一同发表某论文
+     *  多次调用 “通过专家名获得专家节点”的方法，对其结果进行 set 比较，如果一致则返回，否则返回“空”
      * @param map
      * @return
      */
