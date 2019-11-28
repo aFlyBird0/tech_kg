@@ -214,7 +214,7 @@ public class PaperController {
         List<PaperNode> paperNodeList = new ArrayList<>();
         for (List list : paperNodes) {
             while (!list.isEmpty()) {
-                paperNodeList.add(list.indexOf(0));
+//                paperNodeList.add(list.indexOf(0));
             }
         }
 
@@ -232,8 +232,8 @@ public class PaperController {
         if (StringUtils.isEmpty(experts)) {
             return new Response().failure(4001, "参数缺失");
         }
-        List<PaperNode> paperNodes1 = paperNodeRepo.get(summary);
-        return new Response().success(paperNodes);
+//        List<PaperNode> paperNodes1 = paperNodeRepo.get(summary);
+        return new Response().success(null);
     }
 
 }
