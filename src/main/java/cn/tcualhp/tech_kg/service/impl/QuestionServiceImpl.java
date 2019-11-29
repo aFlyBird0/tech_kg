@@ -4,7 +4,9 @@ import cn.tcualhp.tech_kg.model.Neo4jNode.ExpertNode;
 import cn.tcualhp.tech_kg.model.Neo4jNode.PaperNode;
 import cn.tcualhp.tech_kg.model.Neo4jNode.UnitNode;
 import cn.tcualhp.tech_kg.neo4jRepo.ExpertNodeRepo;
+import cn.tcualhp.tech_kg.neo4jRepo.JournalNodeRepo;
 import cn.tcualhp.tech_kg.neo4jRepo.PaperNodeRepo;
+import cn.tcualhp.tech_kg.neo4jRepo.UnitNodeRepo;
 import cn.tcualhp.tech_kg.service.Question2ModelString;
 import cn.tcualhp.tech_kg.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +32,12 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Autowired
     private PaperNodeRepo paperNodeRepo;
+
+    @Autowired
+    private UnitNodeRepo unitNodeRepo;
+
+    @Autowired
+    private JournalNodeRepo journalNodeRepo;
 
     @Override
     public String magicAnswer(String question) {
@@ -147,5 +155,8 @@ public class QuestionServiceImpl implements QuestionService {
     public static void main(String[] args) {
         QuestionServiceImpl questionService = new QuestionServiceImpl();
         String answer = questionService.magicAnswer("张阳发表了什么论文");
+
+        System.out.println(answer);
+
     }
 }
