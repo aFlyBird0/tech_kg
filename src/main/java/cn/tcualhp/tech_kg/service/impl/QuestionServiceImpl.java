@@ -124,20 +124,25 @@ public class QuestionServiceImpl implements QuestionService {
                  */
                 Integer year = Integer.parseInt(reStrings.get(0).replace("年",""));
                 List<PaperNode> paperNode = paperNodeRepo.getPaperNodeByYear(year);
-
                 answer = paperNode.toString();
                 break;
             case 4:
                 /**
                  * 某单位的论文/专利有哪些
                  */
-
+                List<PaperNode> paperNodes1 = paperNodeRepo.getPaperNodeByUnitName();
                 answer = "待写";
                 break;
             case 5:
+                /**
+                 * 某单位 有哪些专家
+                 */
                 answer = "待写";
                 break;
-            case 7:
+            case 6:
+                /**
+                 * 某专家nr 关于 关键字wk 的论文有哪些 ？
+                 */
                 answer = "待写";
                 break;
             default:
