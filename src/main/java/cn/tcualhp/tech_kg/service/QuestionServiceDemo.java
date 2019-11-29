@@ -11,6 +11,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.hankcs.hanlp.HanLP;
 import com.hankcs.hanlp.seg.Segment;
 import com.hankcs.hanlp.seg.common.Term;
+import com.hankcs.hanlp.tokenizer.NLPTokenizer;
 import org.apache.spark.SparkConf;
 import org.apache.spark.api.java.JavaRDD;
 import org.apache.spark.api.java.JavaSparkContext;
@@ -106,7 +107,12 @@ public class QuestionServiceDemo {
          * 句子抽象化
          */
         Segment segment = HanLP.newSegment().enableCustomDictionary(true).enableNameRecognize(true);
-        List<Term> terms = segment.seg(querySentence);
+        /**
+         * 修改分词器，使用 NLPTo 分词器。
+         * “NLP分词NLPTokenizer会执行词性标注和命名实体识别，由结构化感知机序列标注框架支撑。” 来自官方文档
+         * HanLP 文档地址见 ：https://github.com/hankcs/HanLP
+         */
+        List<Term> terms = NLPTokenizer.segment(querySentence);
         String abstractQuery = "";
         abstractMap = new HashMap<String, String>();
         /**
@@ -200,9 +206,9 @@ public class QuestionServiceDemo {
 
         /**
          * HanLP分词，拿分词的结果和词汇表里面的关键特征进行匹配
+         * HanLP 分词使用 NLPTokenizer
          */
-        Segment segment = HanLP.newSegment();
-        List<Term> terms = segment.seg(sentence);
+        List<Term> terms = NLPTokenizer.segment(sentence);
         for (Term term : terms) {
             String word = term.word;
             /**
@@ -397,7 +403,9 @@ public class QuestionServiceDemo {
             QuestionServiceDemo questionServiceDemo = new QuestionServiceDemo();
             questionServiceDemo.analyQuery("李鹤鹏在哪家单位工作");
             System.out.println("");
-            questionServiceDemo.analyQuery("李鹤鹏发表了什么论文");
+            questionServiceDemo.analyQuery("周佳琦发表了什么论文");
+            System.out.println("");
+            questionServiceDemo.analyQuery("周佳琦发表的论文有哪些");
             System.out.println("");
             questionServiceDemo.analyQuery("李鹤鹏工作于哪个单位");
             System.out.println("");
@@ -407,11 +415,16 @@ public class QuestionServiceDemo {
             System.out.println("");
             questionServiceDemo.analyQuery("李鹤鹏工作的地方在哪里");
             System.out.println("");
+            questionServiceDemo.analyQuery("李鹤鹏和丁健合作发表的论文有哪些");
+            System.out.println("");
             questionServiceDemo.analyQuery("丁健和李鹤鹏合作发表的论文有哪些");
+            System.out.println("");
+            questionServiceDemo.analyQuery("赵鹏和李鹤鹏合作发表的论文有哪些");
             System.out.println("");
             questionServiceDemo.analyQuery("杭电有哪些人");
             System.out.println("");
             System.out.println("注：因为还没开启自定义词典，下面的分类应该会错");
+            // t 词性 为时间词
             questionServiceDemo.analyQuery("2019年关于知识图谱的论文有哪些");
             System.out.println("");
             questionServiceDemo.analyQuery("杭电有哪些论文");

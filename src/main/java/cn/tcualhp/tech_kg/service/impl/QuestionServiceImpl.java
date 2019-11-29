@@ -7,11 +7,9 @@ import cn.tcualhp.tech_kg.neo4jRepo.ExpertNodeRepo;
 import cn.tcualhp.tech_kg.neo4jRepo.PaperNodeRepo;
 import cn.tcualhp.tech_kg.service.Question2ModelString;
 import cn.tcualhp.tech_kg.service.QuestionService;
-import org.apache.spark.sql.catalyst.expressions.Exp;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -37,9 +35,8 @@ public class QuestionServiceImpl implements QuestionService {
     public String magicAnswer(String question) {
         ArrayList<String> reStrings = null;
         try {
-             reStrings = question2ModelString.analyQuery(question);
-        }
-        catch (Exception e){
+            reStrings = question2ModelString.analyQuery(question);
+        } catch (Exception e) {
             e.printStackTrace();
             return "服务器发生错误";
         }
@@ -71,12 +68,11 @@ public class QuestionServiceImpl implements QuestionService {
                  * 如果人多余一个要询问是哪个
                  * 如果只有一个直接返回论文
                  */
-                expertNodes= expertNodeRepo.getExpertNodesByName(expertName);
-                if (expertNodes.size()<1){
+                expertNodes = expertNodeRepo.getExpertNodesByName(expertName);
+                if (expertNodes.size() < 1) {
                     answer = "无此人";
                     break;
-                }
-                else {
+                } else {
                     expertNode = expertNodes.get(0);
                 }
                 paperNodes = expertNode.getPaperNodes();
@@ -100,6 +96,7 @@ public class QuestionServiceImpl implements QuestionService {
                 expertNode = expertNodeRepo.getExpertNodesByName(expertName).get(0);
                 unitNodes = expertNode.getUnitNodes();
                 answer = unitNodes.toString();
+                break;
             case 2:
                 /**
                  * 抽象模板详见classify/classifications.json
@@ -110,14 +107,19 @@ public class QuestionServiceImpl implements QuestionService {
                 expertName = reStrings.get(1);
                 expertName2 = reStrings.get(2);
                 answer = "service待写";
+                break;
             case 3:
                 answer = "待写";
+                break;
             case 4:
                 answer = "待写";
+                break;
             case 5:
                 answer = "待写";
+                break;
             case 7:
                 answer = "待写";
+                break;
             default:
                 break;
         }
