@@ -184,7 +184,7 @@ public class QuestionServiceDemo {
      */
     public Map<String, Integer> loadVocabulary() {
         Map<String, Integer> vocabulary = new HashMap<String, Integer>();
-        int index = 0;
+        int index = 1;
         Set<String> vocabularies = new Vocabulary().getVocabularySet("vocabulary.txt");
         for (String v : vocabularies) {
             vocabulary.put(v, index);
@@ -327,7 +327,7 @@ public class QuestionServiceDemo {
 
         //加载所有问题模型
         for (String questionFileName : questionFileNames) {
-            QuestionList questionList = new QuestionList(questionRootDir + questionFileName);
+            QuestionList questionList = new QuestionList(questionRootDir+questionFileName);
             List<Question> questions = questionList.getQuestions();
             //将问题列表转换成向量
             for (Question q : questions) {
