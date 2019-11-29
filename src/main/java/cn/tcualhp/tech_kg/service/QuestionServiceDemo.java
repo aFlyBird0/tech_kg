@@ -112,6 +112,7 @@ public class QuestionServiceDemo {
 
     /**
      * 句子抽象化
+     *
      * @param querySentence 请求的句子
      * @return
      */
@@ -360,6 +361,7 @@ public class QuestionServiceDemo {
 
     /**
      * 句子还原
+     *
      * @param queryPattern
      * @return
      */
@@ -387,87 +389,119 @@ public class QuestionServiceDemo {
     }
 
     public static void main(String[] args) {
-        try {
-            QuestionServiceDemo questionServiceDemo = new QuestionServiceDemo();
-            /**
-             * 未成功检测，期望 1 ，命中 5
-             */
-            questionServiceDemo.analysisQuery("李鹤鹏在哪家单位工作");
-            System.out.println("");
-            /**
-             * 成功检测
-             */
-            questionServiceDemo.analysisQuery("周佳琦发表了什么论文");
-            System.out.println("");
-            /**
-             * 未成功检测，期望 1 ，命中 5
-             */
-            questionServiceDemo.analysisQuery("周佳琦发表的论文有哪些");
-            System.out.println("");
-            /**
-             * 未成功检测，期望 2 ，命中 5
-             */
-            questionServiceDemo.analysisQuery("李鹤鹏工作于哪个单位");
-            System.out.println("");
-            /**
-             * 成功检测
-             */
-            questionServiceDemo.analysisQuery("李鹤鹏在哪里");
-            System.out.println("");
-            /**
-             * 未成功检测，期望 0 ，命中 5
-             */
-            questionServiceDemo.analysisQuery("有哪些论文是李鹤鹏写的");
-            System.out.println("");
-            /**
-             * 未成功检测，期望 1，命中 5
-             * nlp分词，人名成功识别
-             */
-            questionServiceDemo.analysisQuery("李鹤鹏工作的地方在哪里");
-            System.out.println("");
-            /**
-             * 未成功检测，期望 2 ，命中 5
-             * nlp分词，人名成功识别
-             */
-            questionServiceDemo.analysisQuery("李鹤鹏和丁健合作发表的论文有哪些");
-            System.out.println("");
-            /**
-             * 未成功检测，期望 2 ，命中 5
-             * nlp分词，人名成功识别
-             */
-            questionServiceDemo.analysisQuery("丁健和李鹤鹏合作发表的论文有哪些");
-            System.out.println("");
-            /**
-             * 未成功检测，期望 2 ，命中 5
-             * nlp分词，人名成功识别
-             */
-            questionServiceDemo.analysisQuery("赵鹏和李鹤鹏合作发表的论文有哪些");
-            System.out.println("");
-            /**
-             * 成功检测
-             */
-            questionServiceDemo.analysisQuery("杭州电子科技大学有哪些专家");
-            System.out.println("");
-            // t 词性 为时间词
-            /**
-             * 未成功检测，期望 3，命中 5
-             */
-            questionServiceDemo.analysisQuery("2019年关于知识图谱的论文有哪些");
-            System.out.println("");
-            /**
-             * 未成功检测，期望 4 ，命中 5
-             */
-            questionServiceDemo.analysisQuery("清华有哪些论文");
-            System.out.println("");
-            /**
-             * 未成功检测，期望 6 ，命中 5
-             */
-            questionServiceDemo.analysisQuery("李鹤鹏发表过的关于知识图谱的论文有哪些");
-            System.out.println("");
-        } catch (Exception e) {
-            e.printStackTrace();
+        /**
+         * 开发模式，为 1 则表示测试全部开发样例。
+         */
+        int devMode = 1;
+        if (devMode == 1) {
+            try {
+                QuestionServiceDemo questionServiceDemo = new QuestionServiceDemo();
+                /**
+                 * 未成功检测，期望 1 ，命中 5
+                 */
+                questionServiceDemo.analysisQuery("李鹤鹏在哪家单位工作");
+                System.out.println("");
+                /**
+                 * 成功检测。期望 0 ，命中 0
+                 */
+                questionServiceDemo.analysisQuery("周佳琦发表了什么论文");
+                System.out.println("");
+                /**
+                 * 未成功检测，期望 1 ，命中 5
+                 */
+                questionServiceDemo.analysisQuery("周佳琦发表的论文有哪些");
+                System.out.println("");
+                /**
+                 * 未成功检测，期望 2 ，命中 5
+                 */
+                questionServiceDemo.analysisQuery("李鹤鹏工作于哪个单位");
+                System.out.println("");
+                /**
+                 * 成功检测
+                 */
+                questionServiceDemo.analysisQuery("李鹤鹏在哪里");
+                System.out.println("");
+                /**
+                 * 未成功检测，期望 0 ，命中 5
+                 */
+                questionServiceDemo.analysisQuery("有哪些论文是李鹤鹏写的");
+                System.out.println("");
+                /**
+                 * 未成功检测，期望 1，命中 5
+                 * nlp分词，人名成功识别
+                 */
+                questionServiceDemo.analysisQuery("李鹤鹏工作的地方在哪里");
+                System.out.println("");
+                /**
+                 * 未成功检测，期望 2 ，命中 5
+                 * nlp分词，人名成功识别
+                 */
+                questionServiceDemo.analysisQuery("李鹤鹏和丁健合作发表的论文有哪些");
+                System.out.println("");
+                /**
+                 * 未成功检测，期望 2 ，命中 5
+                 * nlp分词，人名成功识别
+                 */
+                questionServiceDemo.analysisQuery("丁健和李鹤鹏合作发表的论文有哪些");
+                System.out.println("");
+                /**
+                 * 未成功检测，期望 2 ，命中 5
+                 * nlp分词，人名成功识别
+                 */
+                questionServiceDemo.analysisQuery("赵鹏和李鹤鹏合作发表的论文有哪些");
+                System.out.println("");
+                /**
+                 * 成功检测
+                 */
+                questionServiceDemo.analysisQuery("杭州电子科技大学有哪些专家");
+                System.out.println("");
+                // t 词性 为时间词
+                /**
+                 * 未成功检测，期望 3，命中 5
+                 */
+                questionServiceDemo.analysisQuery("2019年关于知识图谱的论文有哪些");
+                System.out.println("");
+                /**
+                 * 未成功检测，期望 4 ，命中 5
+                 */
+                questionServiceDemo.analysisQuery("清华有哪些论文");
+                System.out.println("");
+                /**
+                 * 未成功检测，期望 6 ，命中 5
+                 */
+                questionServiceDemo.analysisQuery("李鹤鹏发表过的关于知识图谱的论文有哪些");
+                System.out.println("");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
+        /**
+         * 演示已经测试成功的转化样例
+         */
+        int showSuccessButton = 0;
+        if (showSuccessButton == 1) {
+            try {
+                QuestionServiceDemo questionServiceDemo = new QuestionServiceDemo();
+                /**
+                 * 成功检测。期望 0 ，命中 0
+                 */
+                questionServiceDemo.analysisQuery("周佳琦发表了什么论文");
+                System.out.println("");
+                /**
+                 * 成功检测。期望 5 ，命中 5
+                 */
+                questionServiceDemo.analysisQuery("李鹤鹏在哪里");
+                System.out.println("");
+                /**
+                 * 成功检测。期望 5，命中 5
+                 */
+                questionServiceDemo.analysisQuery("杭州电子科技大学有哪些专家");
+                System.out.println("");
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+        }
 
     }
 }
