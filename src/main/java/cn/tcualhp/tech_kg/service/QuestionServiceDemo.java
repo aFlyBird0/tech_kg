@@ -4,6 +4,7 @@ import cn.tcualhp.tech_kg.process.Classification;
 import cn.tcualhp.tech_kg.process.Question;
 import cn.tcualhp.tech_kg.process.QuestionList;
 import cn.tcualhp.tech_kg.process.Vocabulary;
+import cn.tcualhp.tech_kg.utils.ConsoleUtil;
 import cn.tcualhp.tech_kg.utils.LoadJsonUtil;
 import cn.tcualhp.tech_kg.utils.TermUtil;
 import com.alibaba.fastjson.JSONArray;
@@ -68,26 +69,33 @@ public class QuestionServiceDemo {
         nbModel = loadClassifierModel();
     }
 
-    public ArrayList<String> analyQuery(String queryString) throws Exception {
+    /**
+     * @param queryString
+     * @return
+     * @throws Exception
+     */
+    public ArrayList<String> analysisQuery(String queryString) throws Exception {
 
         /**
-         * 打印问句
+         * 打印查询的 queryString 同时打印提示信息
          */
-        System.out.println("原始句子：" + queryString);
-        System.out.println("========HanLP开始分词========");
+        ConsoleUtil.printOriginSentence(queryString);
 
         /**
          * 抽象句子，利用HanPL分词，将关键字进行词性抽象
          */
         String abstr = queryAbstract(queryString);
-        System.out.println("句子抽象化结果：" + abstr);// nm 的 导演 是 谁
+        // nr 有 哪些 论文
+        System.out.println("句子抽象化结果：" + abstr);
 
         /**
          * 将抽象的句子与spark训练集中的模板进行匹配，拿到句子对应的模板
          */
         String strPatt = queryClassify(abstr);
-        System.out.println("句子套用模板结果：" + strPatt); // nm 制作 导演列表
-
+        /**
+         * nr 论文
+         */
+        System.out.println("句子套用模板结果：" + strPatt);
 
         /**
          * 模板还原成句子，此时问题已转换为我们熟悉的操作
@@ -102,10 +110,12 @@ public class QuestionServiceDemo {
         return resultList;
     }
 
+    /**
+     * 句子抽象化
+     * @param querySentence 请求的句子
+     * @return
+     */
     public String queryAbstract(String querySentence) {
-        /**
-         * 句子抽象化
-         */
         Segment segment = HanLP.newSegment().enableCustomDictionary(true).enableNameRecognize(true);
         /**
          * 修改分词器，使用 NLPTo 分词器。
@@ -129,14 +139,14 @@ public class QuestionServiceDemo {
                 abstractQuery += "nr";
                 abstractMap.put("nr", word);
                 nrCount++;
-            }else if (TermUtil.isWordNatureEquals(term, "nr") && nrCount == 1){
+            } else if (TermUtil.isWordNatureEquals(term, "nr") && nrCount == 1) {
                 /**
                  * 第二次出现人名
                  */
                 abstractQuery += "n2r";
                 abstractMap.put("n2r", word);
                 nrCount++;
-            }else if (TermUtil.isWordNatureEquals(term, "m")){
+            } else if (TermUtil.isWordNatureEquals(term, "m")) {
                 /**
                  * 数字
                  * 注意目前是用作年份，但也许会和年龄冲突
@@ -144,26 +154,25 @@ public class QuestionServiceDemo {
                  */
                 abstractQuery += "m";
                 abstractMap.put("m", word);
-            }else if (TermUtil.isWordNatureEquals(term, "wk")){
+            } else if (TermUtil.isWordNatureEquals(term, "wk")) {
                 /**
                  * 自定义关键词
                  */
                 abstractQuery += "wk";
                 abstractMap.put("wk", word);
-            }else if (TermUtil.isWordNatureEquals(term, "nt") || TermUtil.isWordNatureEquals(term, "ntu")
-            || TermUtil.isWordNatureEquals(term, "ntc") || TermUtil.isWordNatureEquals(term, "nth")
-            || TermUtil.isWordNatureEquals(term, "nto") || TermUtil.isWordNatureEquals(term, "nts")){
+            } else if (TermUtil.isWordNatureEquals(term, "nt") || TermUtil.isWordNatureEquals(term, "ntu")
+                    || TermUtil.isWordNatureEquals(term, "ntc") || TermUtil.isWordNatureEquals(term, "nth")
+                    || TermUtil.isWordNatureEquals(term, "nto") || TermUtil.isWordNatureEquals(term, "nts")) {
                 /**
                  * 单位，包含很多单位，所以自定义一个词性
                  */
                 abstractQuery += "unit";
                 abstractMap.put("unit", word);
-            }
-            else {
+            } else {
                 abstractQuery += word + " ";
             }
         }
-        System.out.println("========HanLP分词结束========");
+        ConsoleUtil.printSegmentFinishInfo();
         return abstractQuery;
     }
 
@@ -175,14 +184,10 @@ public class QuestionServiceDemo {
     public Map<String, Integer> loadVocabulary() {
         Map<String, Integer> vocabulary = new HashMap<String, Integer>();
         int index = 1;
-        try {
-            Set<Vocabulary> vocabularies = new Vocabulary().getVocabularySet("/vocabulary/vocabulary.json");
-            for (Vocabulary v : vocabularies) {
-                vocabulary.put(v.getValue(), index);
-                index += 1;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        Set<String> vocabularies = new Vocabulary().getVocabularySet("vocabulary.txt");
+        for (String v : vocabularies) {
+            vocabulary.put(v, index);
+            index += 1;
         }
         return vocabulary;
     }
@@ -300,15 +305,6 @@ public class QuestionServiceDemo {
          * spark.app.name 用于指定应用的程序名称  ==
          */
 
-        /**
-         * 题外话
-         * 贝叶斯是谁？
-         * 贝叶斯(约1701-1763) Thomas Bayes，英国数学家。
-         * 1702年出生于伦敦，做过神甫。
-         * 1742年成为英国皇家学会会员。
-         * 1763年4月7日逝世。
-         * 贝叶斯在数学方面主要研究概率论 == 贝叶斯公式是概率论中较为重要的公式
-         */
         SparkConf conf = new SparkConf().setAppName("NaiveBayesTest").setMaster("local[*]");
         JavaSparkContext sc = new JavaSparkContext(conf);
 
@@ -320,17 +316,7 @@ public class QuestionServiceDemo {
          */
         List<LabeledPoint> train_list = new LinkedList<LabeledPoint>();
 
-
         final String questionRootDir = "/questions/";
-        //问题列表文件名
-//        final List<String> questionFileNames = new ArrayList<>();
-//        questionFileNames.add("00questionPublish.json");
-//        questionFileNames.add("01questionWorkIn.json");
-//        questionFileNames.add("02questionCooperation.json");
-//        questionFileNames.add("06questionExpertKeywords.json");
-//        questionFileNames.add("05questionUnitExperts.json");
-//        questionFileNames.add("04questionUnitPapers.json");
-//        questionFileNames.add("03questionYearKeywords.json");
 
         /**
          * 问题列表
@@ -339,8 +325,7 @@ public class QuestionServiceDemo {
         String[] questionFileNames = questionDir.list();
 
         //加载所有问题模型
-        for (String questionFileName : questionFileNames
-        ) {
+        for (String questionFileName : questionFileNames) {
             QuestionList questionList = new QuestionList(questionRootDir + questionFileName);
             List<Question> questions = questionList.getQuestions();
             //将问题列表转换成向量
@@ -373,15 +358,18 @@ public class QuestionServiceDemo {
 
     }
 
+    /**
+     * 句子还原
+     * @param queryPattern
+     * @return
+     */
     public String queryExtenstion(String queryPattern) {
-        // 句子还原
         Set<String> set = abstractMap.keySet();
         for (String key : set) {
             /**
              * 如果句子模板中含有抽象的词性
              */
             if (queryPattern.contains(key)) {
-
                 /**
                  * 则替换抽象词性为具体的值
                  */
@@ -401,35 +389,34 @@ public class QuestionServiceDemo {
     public static void main(String[] args) {
         try {
             QuestionServiceDemo questionServiceDemo = new QuestionServiceDemo();
-            questionServiceDemo.analyQuery("李鹤鹏在哪家单位工作");
+            questionServiceDemo.analysisQuery("李鹤鹏在哪家单位工作");
             System.out.println("");
-            questionServiceDemo.analyQuery("周佳琦发表了什么论文");
+            questionServiceDemo.analysisQuery("周佳琦发表了什么论文");
             System.out.println("");
-            questionServiceDemo.analyQuery("周佳琦发表的论文有哪些");
+            questionServiceDemo.analysisQuery("周佳琦发表的论文有哪些");
             System.out.println("");
-            questionServiceDemo.analyQuery("李鹤鹏工作于哪个单位");
+            questionServiceDemo.analysisQuery("李鹤鹏工作于哪个单位");
             System.out.println("");
-            questionServiceDemo.analyQuery("李鹤鹏在哪里");
+            questionServiceDemo.analysisQuery("李鹤鹏在哪里");
             System.out.println("");
-            questionServiceDemo.analyQuery("有哪些论文是李鹤鹏写的");
+            questionServiceDemo.analysisQuery("有哪些论文是李鹤鹏写的");
             System.out.println("");
-            questionServiceDemo.analyQuery("李鹤鹏工作的地方在哪里");
+            questionServiceDemo.analysisQuery("李鹤鹏工作的地方在哪里");
             System.out.println("");
-            questionServiceDemo.analyQuery("李鹤鹏和丁健合作发表的论文有哪些");
+            questionServiceDemo.analysisQuery("李鹤鹏和丁健合作发表的论文有哪些");
             System.out.println("");
-            questionServiceDemo.analyQuery("丁健和李鹤鹏合作发表的论文有哪些");
+            questionServiceDemo.analysisQuery("丁健和李鹤鹏合作发表的论文有哪些");
             System.out.println("");
-            questionServiceDemo.analyQuery("赵鹏和李鹤鹏合作发表的论文有哪些");
+            questionServiceDemo.analysisQuery("赵鹏和李鹤鹏合作发表的论文有哪些");
             System.out.println("");
-            questionServiceDemo.analyQuery("杭电有哪些人");
+            questionServiceDemo.analysisQuery("杭州电子科技大学有哪些专家");
             System.out.println("");
-            System.out.println("注：因为还没开启自定义词典，下面的分类应该会错");
             // t 词性 为时间词
-            questionServiceDemo.analyQuery("2019年关于知识图谱的论文有哪些");
+            questionServiceDemo.analysisQuery("2019年关于知识图谱的论文有哪些");
             System.out.println("");
-            questionServiceDemo.analyQuery("杭电有哪些论文");
+            questionServiceDemo.analysisQuery("清华有哪些论文");
             System.out.println("");
-            questionServiceDemo.analyQuery("李鹤鹏发表过的关于知识图谱的论文有哪些");
+            questionServiceDemo.analysisQuery("李鹤鹏发表过的关于知识图谱的论文有哪些");
             System.out.println("");
         } catch (Exception e) {
             e.printStackTrace();

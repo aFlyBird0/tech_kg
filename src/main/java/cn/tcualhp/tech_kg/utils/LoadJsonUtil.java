@@ -21,5 +21,4 @@ public class LoadJsonUtil {
         String text = IOUtils.toString(inputStream, "UTF-8");
         return JSON.parseObject(text);
     }
-
 }

@@ -1,13 +1,12 @@
 package cn.tcualhp.tech_kg.process;
 
-import cn.tcualhp.tech_kg.utils.LoadJsonUtil;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.IOException;
-import java.util.*;
+import java.io.*;
+import java.util.HashSet;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author jerry
@@ -44,27 +43,44 @@ public class Vocabulary {
      * @return list 全部词汇的 list
      * @throws IOException
      */
-    public Set<Vocabulary> getVocabularySet(String filename) throws IOException {
-        JSONObject jsonObject = LoadJsonUtil.getJsonObject(filename);
-        JSONArray vocabulary = jsonObject.getJSONArray("vocabulary");
-        Set<Vocabulary> vocabularies = new HashSet<>();
-        List<Vocabulary> vocabularyList = new ArrayList<>();
-        for (int i = 0; i < vocabulary.size(); i++) {
-            Vocabulary v = new Vocabulary();
-            v.id = i + 1;
-            v.value = vocabulary.getJSONObject(i).getString("value");
-            v.type = vocabulary.getJSONObject(i).getString("type");
-            vocabularies.add(v);
+//    public Set<Vocabulary> getVocabularySet(String filename) throws IOException {
+//        JSONObject jsonObject = LoadJsonUtil.getJsonObject(filename);
+//        JSONArray vocabulary = jsonObject.getJSONArray("vocabulary");
+//        Set<Vocabulary> vocabularies = new HashSet<>();
+//        List<Vocabulary> vocabularyList = new ArrayList<>();
+//        for (int i = 0; i < vocabulary.size(); i++) {
+//            Vocabulary v = new Vocabulary();
+//            v.id = i + 1;
+//            v.value = vocabulary.getJSONObject(i).getString("value");
+//            v.type = vocabulary.getJSONObject(i).getString("type");
+//            vocabularies.add(v);
+//        }
+//        return vocabularies;
+//    }
+
+    /**
+     *
+     * @param filename
+     * @return
+     */
+    public Set<String> getVocabularySet(String filename) {
+        String filepath = "src/main/resources/vocabulary/";
+        Set<String> vocabularies = new HashSet<>();
+        try {
+            File file = new File(filepath + filename);
+            InputStreamReader reader = new InputStreamReader(new FileInputStream(file));
+            BufferedReader br = new BufferedReader(reader);
+            String line;
+            while ((line = br.readLine()) != null) {
+                vocabularies.add(line);
+            }
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
         return vocabularies;
     }
 
-    /**
-     * 判断是否重复，词就是唯一值
-     *
-     * @param o
-     * @return
-     */
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -74,25 +90,25 @@ public class Vocabulary {
             return false;
         }
         Vocabulary that = (Vocabulary) o;
-        return value.equals(that.value);
+        return id == that.id &&
+                Objects.equals(value, that.value) &&
+                Objects.equals(type, that.type);
     }
 
-    /**
-     * 哈希，和id与type无关
-     *
-     * @return
-     */
     @Override
     public int hashCode() {
-        return Objects.hash(value);
+        return Objects.hash(id, value, type);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         Vocabulary vocabulary = new Vocabulary();
-        Set<Vocabulary> vocabularies = vocabulary.getVocabularySet("vocabulary/vocabulary.json");
-        for (Vocabulary v : vocabularies) {
-            System.out.println(v.id + v.value + v.type);
+        Set<String> vocabularies = vocabulary.getVocabularySet("vocabulary.txt");
+        int count = 0;
+        for (String v : vocabularies) {
+            System.out.println(v);
+            count++;
         }
+        System.out.println(count);
     }
 
 }

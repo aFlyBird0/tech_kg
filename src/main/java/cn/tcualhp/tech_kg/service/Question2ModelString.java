@@ -4,6 +4,7 @@ import cn.tcualhp.tech_kg.process.Classification;
 import cn.tcualhp.tech_kg.process.Question;
 import cn.tcualhp.tech_kg.process.QuestionList;
 import cn.tcualhp.tech_kg.process.Vocabulary;
+import cn.tcualhp.tech_kg.utils.ConsoleUtil;
 import cn.tcualhp.tech_kg.utils.LoadJsonUtil;
 import cn.tcualhp.tech_kg.utils.TermUtil;
 import com.alibaba.fastjson.JSONArray;
@@ -69,32 +70,30 @@ public class Question2ModelString {
         nbModel = loadClassifierModel();
     }
 
-    public ArrayList<String> analyQuery(String queryString) throws Exception {
+    public ArrayList<String> analysisQuery(String queryString) throws Exception {
 
         /**
          * 打印问句
          */
-        System.out.println("原始句子：" + queryString);
-        System.out.println("========HanLP开始分词========");
+        ConsoleUtil.printOriginSentence(queryString);
 
         /**
          * 抽象句子，利用HanPL分词，将关键字进行词性抽象
          */
         String abstr = queryAbstract(queryString);
-        System.out.println("句子抽象化结果：" + abstr);// nm 的 导演 是 谁
+        System.out.println("句子抽象化结果：" + abstr);
 
         /**
          * 将抽象的句子与spark训练集中的模板进行匹配，拿到句子对应的模板
          */
         String strPatt = queryClassify(abstr);
-        System.out.println("句子套用模板结果：" + strPatt); // nm 制作 导演列表
-
+        System.out.println("句子套用模板结果：" + strPatt);
 
         /**
          * 模板还原成句子，此时问题已转换为我们熟悉的操作
          */
         String finalPattern = queryExtenstion(strPatt);
-        System.out.println("原始句子替换成系统可识别的结果：" + finalPattern);// 但丁密码 制作 导演列表
+        System.out.println("原始句子替换成系统可识别的结果：" + finalPattern);
 
         ArrayList<String> resultList = new ArrayList<String>();
         resultList.add(String.valueOf(modelIndex));
@@ -167,15 +166,10 @@ public class Question2ModelString {
     public Map<String, Integer> loadVocabulary() {
         Map<String, Integer> vocabulary = new HashMap<String, Integer>();
         int index = 1;
-        try {
-            Set<Vocabulary> vocabularies = new Vocabulary().getVocabularySet("/vocabulary/vocabulary.json");
-            for (Vocabulary v : vocabularies
-            ) {
-                vocabulary.put(v.getValue(), index);
-                index += 1;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        Set<String> vocabularies = new Vocabulary().getVocabularySet("vocabulary.txt");
+        for (String v : vocabularies) {
+            vocabulary.put(v, index);
+            index += 1;
         }
         return vocabulary;
     }
@@ -377,17 +371,17 @@ public class Question2ModelString {
     public static void main(String[] args) {
         try {
             Question2ModelString questionServiceDemo = new Question2ModelString();
-            questionServiceDemo.analyQuery("李鹤鹏在哪家单位工作");
+            questionServiceDemo.analysisQuery("李鹤鹏在哪家单位工作");
             System.out.println("");
-            questionServiceDemo.analyQuery("李鹤鹏发表了什么论文");
+            questionServiceDemo.analysisQuery("李鹤鹏发表了什么论文");
             System.out.println("");
-            questionServiceDemo.analyQuery("李鹤鹏工作于哪个单位");
+            questionServiceDemo.analysisQuery("李鹤鹏工作于哪个单位");
             System.out.println("");
-            questionServiceDemo.analyQuery("李鹤鹏在哪里");
+            questionServiceDemo.analysisQuery("李鹤鹏在哪里");
             System.out.println("");
-            questionServiceDemo.analyQuery("有哪些论文是李鹤鹏写的");
+            questionServiceDemo.analysisQuery("有哪些论文是李鹤鹏写的");
             System.out.println("");
-            questionServiceDemo.analyQuery("李鹤鹏工作的地方在哪里");
+            questionServiceDemo.analysisQuery("李鹤鹏工作的地方在哪里");
             System.out.println("");
         } catch (Exception e) {
             e.printStackTrace();

@@ -35,7 +35,7 @@ public class QuestionServiceImpl implements QuestionService {
     public String magicAnswer(String question) {
         ArrayList<String> reStrings = null;
         try {
-            reStrings = question2ModelString.analyQuery(question);
+            reStrings = question2ModelString.analysisQuery(question);
         } catch (Exception e) {
             e.printStackTrace();
             return "服务器发生错误";
@@ -106,12 +106,24 @@ public class QuestionServiceImpl implements QuestionService {
                  */
                 expertName = reStrings.get(1);
                 expertName2 = reStrings.get(2);
+
                 answer = "service待写";
                 break;
             case 3:
-                answer = "待写";
+                /**
+                 * 抽象问题模板：m年发表的某关键词的论文/专利有哪些
+                 *
+                 */
+                Integer year = Integer.parseInt(reStrings.get(0).replace("年",""));
+                List<PaperNode> paperNode = paperNodeRepo.getPaperNodeByYear(year);
+
+                answer = paperNode.toString();
                 break;
             case 4:
+                /**
+                 * 某单位的论文/专利有哪些
+                 */
+
                 answer = "待写";
                 break;
             case 5:
