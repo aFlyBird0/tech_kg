@@ -130,7 +130,7 @@ public class QuestionServiceImpl implements QuestionService {
                 /**
                  * 某单位的论文/专利有哪些
                  */
-                List<PaperNode> paperNodes1 = paperNodeRepo.getPaperNodeByUnitName();
+//                List<PaperNode> paperNodes1 = paperNodeRepo.getPaperNodeByUnitName();
                 answer = "待写";
                 break;
             case 5:
