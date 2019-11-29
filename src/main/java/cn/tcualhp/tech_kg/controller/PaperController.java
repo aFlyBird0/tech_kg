@@ -242,8 +242,9 @@ public class PaperController {
         if (StringUtils.isEmpty(unitName)) {
             return new Response().failure(4002, "参数缺失");
         }
-        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByYear();
-        return new Response().success(allPaperNodes);
+//        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByYear();
+        return new Response().success();
+//        return new Response().success(allPaperNodes);
     }
 
 }
