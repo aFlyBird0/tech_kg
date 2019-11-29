@@ -117,14 +117,14 @@ public class Question2ModelString {
                 /**
                  *  nr 人名
                  */
-                abstractQuery += "nr";
+                abstractQuery += "nr ";
                 abstractMap.put("nr", word);
                 nrCount++;
             }else if (TermUtil.isWordNatureEquals(term, "nr") && nrCount == 1){
                 /**
                  * 第二次出现人名
                  */
-                abstractQuery += "n2r";
+                abstractQuery += "n2r ";
                 abstractMap.put("n2r", word);
                 nrCount++;
             }else if (TermUtil.isWordNatureEquals(term, "m")){
@@ -133,13 +133,13 @@ public class Question2ModelString {
                  * 注意目前是用作年份，但也许会和年龄冲突
                  * 这个问题可能需要用分类器的不同问题模板来弥补
                  */
-                abstractQuery += "m";
+                abstractQuery += "m ";
                 abstractMap.put("m", word);
             }else if (TermUtil.isWordNatureEquals(term, "wk")){
                 /**
                  * 自定义关键词
                  */
-                abstractQuery += "wk";
+                abstractQuery += "wk ";
                 abstractMap.put("wk", word);
             }else if (TermUtil.isWordNatureEquals(term, "nt") || TermUtil.isWordNatureEquals(term, "ntu")
                     || TermUtil.isWordNatureEquals(term, "ntc") || TermUtil.isWordNatureEquals(term, "nth")
@@ -147,7 +147,7 @@ public class Question2ModelString {
                 /**
                  * 单位，包含很多单位，所以自定义一个词性
                  */
-                abstractQuery += "unit";
+                abstractQuery += "unit ";
                 abstractMap.put("unit", word);
             }
             else {
@@ -165,7 +165,7 @@ public class Question2ModelString {
      */
     public Map<String, Integer> loadVocabulary() {
         Map<String, Integer> vocabulary = new HashMap<String, Integer>();
-        int index = 1;
+        int index = 0;
         Set<String> vocabularies = new Vocabulary().getVocabularySet("vocabulary.txt");
         for (String v : vocabularies) {
             vocabulary.put(v, index);

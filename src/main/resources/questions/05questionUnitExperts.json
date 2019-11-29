@@ -1,199 +1,31 @@
 {
   "comments": "HanLP 的人名的 词性标注为 nr ",
-  "questionDescription": "某人任职与哪个单位",
+  "questionDescription": "某单位有哪些人",
   "questionType": 5,
   "questions": [
     {
       "id": 1,
-      "value": "ntu的专家有哪些"
-    },
-    {
-      "id": 2,
-      "value": "nt的专家有哪些"
-    },
-    {
-      "id": 3,
-      "value": "ntc的专家有哪些"
-    },
-    {
-      "id": 4,
-      "value": "nth的专家有哪些"
-    },
-    {
-      "id": 5,
-      "value": "nto的专家有哪些"
-    },
-    {
-      "id": 6,
-      "value": "nts的专家有哪些"
+      "value": "unit的专家有哪些"
     },
     {
       "id": 7,
-      "value": "ntu的专家有"
-    },
-    {
-      "id": 8,
-      "value": "nt的专家有"
-    },
-    {
-      "id": 9,
-      "value": "ntc的专家有"
-    },
-    {
-      "id": 10,
-      "value": "nth的专家有"
-    },
-    {
-      "id": 11,
-      "value": "nto的专家有"
-    },
-    {
-      "id": 12,
-      "value": "nts的专家有"
-    },
-    {
-      "id": 13,
-      "value": "ntu的专家有"
-    },
-    {
-      "id": 14,
-      "value": "nt的专家有"
-    },
-    {
-      "id": 15,
-      "value": "ntc的专家有"
-    },
-    {
-      "id": 16,
-      "value": "nth的专家有"
-    },
-    {
-      "id": 17,
-      "value": "nto的专家有"
-    },
-    {
-      "id": 18,
-      "value": "nts的专家有"
+      "value": "unit的专家有"
     },
     {
       "id": 19,
-      "value": "ntu的专家"
-    },
-    {
-      "id": 20,
-      "value": "nt的专家"
-    },
-    {
-      "id": 21,
-      "value": "ntc的专家"
-    },
-    {
-      "id": 22,
-      "value": "nth的专家"
-    },
-    {
-      "id": 23,
-      "value": "nto的专家"
-    },
-    {
-      "id": 24,
-      "value": "nts的专家"
+      "value": "unit的专家"
     },
     {
       "id": 25,
-      "value": "ntu的教授有哪些"
-    },
-    {
-      "id": 26,
-      "value": "nt的教授有哪些"
-    },
-    {
-      "id": 27,
-      "value": "ntc的教授有哪些"
-    },
-    {
-      "id": 28,
-      "value": "nth的教授有哪些"
-    },
-    {
-      "id": 29,
-      "value": "nto的教授有哪些"
-    },
-    {
-      "id": 30,
-      "value": "nts的教授有哪些"
+      "value": "unit的教授有哪些"
     },
     {
       "id": 31,
-      "value": "ntu的教授有"
-    },
-    {
-      "id": 32,
-      "value": "nt的教授有"
-    },
-    {
-      "id": 33,
-      "value": "ntc的教授有"
-    },
-    {
-      "id": 34,
-      "value": "nth的教授有"
-    },
-    {
-      "id": 35,
-      "value": "nto的教授有"
-    },
-    {
-      "id": 36,
-      "value": "nts的教授有"
-    },
-    {
-      "id": 37,
-      "value": "ntu的教授有"
-    },
-    {
-      "id": 38,
-      "value": "nt的教授有"
-    },
-    {
-      "id": 39,
-      "value": "ntc的教授有"
-    },
-    {
-      "id": 40,
-      "value": "nth的教授有"
-    },
-    {
-      "id": 41,
-      "value": "nto的教授有"
-    },
-    {
-      "id": 42,
-      "value": "nts的教授有"
+      "value": "unit的教授有"
     },
     {
       "id": 43,
-      "value": "ntu的教授"
-    },
-    {
-      "id": 44,
-      "value": "nt的教授"
-    },
-    {
-      "id": 45,
-      "value": "ntc的教授"
-    },
-    {
-      "id": 46,
-      "value": "nth的教授"
-    },
-    {
-      "id": 47,
-      "value": "nto的教授"
-    },
-    {
-      "id": 48,
-      "value": "nts的教授"
+      "value": "unit的教授"
     }
   ]
 }

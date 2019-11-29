@@ -236,14 +236,15 @@ public class PaperController {
         return new Response().success(null);
     }
 
-//    @PostMapping("/getPapersByUnitName")
-//    public Response getPapersByUnitName(@RequestBody Map<String, String> map) {
-//        String unitName = map.get("unitName");
-//        if (StringUtils.isEmpty(unitName)) {
-//            return new Response().failure(4002, "参数缺失");
-//        }
+    @PostMapping("/getPapersByUnitName")
+    public Response getPapersByUnitName(@RequestBody Map<String, String> map) {
+        String unitName = map.get("unitName");
+        if (StringUtils.isEmpty(unitName)) {
+            return new Response().failure(4002, "参数缺失");
+        }
 //        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByYear();
+        return new Response().success();
 //        return new Response().success(allPaperNodes);
-//    }
+    }
 
 }

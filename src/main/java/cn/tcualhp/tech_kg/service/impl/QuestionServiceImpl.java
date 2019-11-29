@@ -156,12 +156,4 @@ public class QuestionServiceImpl implements QuestionService {
             return "无答案";
         }
     }
-
-    public static void main(String[] args) {
-        QuestionServiceImpl questionService = new QuestionServiceImpl();
-        String answer = questionService.magicAnswer("张阳发表了什么论文");
-
-        System.out.println(answer);
-
-    }
 }
