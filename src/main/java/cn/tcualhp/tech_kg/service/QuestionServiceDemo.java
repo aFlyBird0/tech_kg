@@ -123,7 +123,11 @@ public class QuestionServiceDemo {
          * “NLP分词NLPTokenizer会执行词性标注和命名实体识别，由结构化感知机序列标注框架支撑。” 来自官方文档
          * HanLP 文档地址见 ：https://github.com/hankcs/HanLP
          */
-        List<Term> terms = NLPTokenizer.segment(querySentence);
+//        List<Term> terms = NLPTokenizer.segment(querySentence);
+        /**
+         * 复原分词器，怀疑是分词器问题
+         */
+        List<Term> terms = segment.seg(querySentence);
         String abstractQuery = "";
         abstractMap = new HashMap<String, String>();
         /**
@@ -137,14 +141,14 @@ public class QuestionServiceDemo {
                 /**
                  *  nr 人名
                  */
-                abstractQuery += "nr";
+                abstractQuery += "nr ";
                 abstractMap.put("nr", word);
                 nrCount++;
             } else if (TermUtil.isWordNatureEquals(term, "nr") && nrCount == 1) {
                 /**
                  * 第二次出现人名
                  */
-                abstractQuery += "n2r";
+                abstractQuery += "n2r ";
                 abstractMap.put("n2r", word);
                 nrCount++;
             } else if (TermUtil.isWordNatureEquals(term, "m")) {
@@ -153,13 +157,13 @@ public class QuestionServiceDemo {
                  * 注意目前是用作年份，但也许会和年龄冲突
                  * 这个问题可能需要用分类器的不同问题模板来弥补
                  */
-                abstractQuery += "m";
+                abstractQuery += "m ";
                 abstractMap.put("m", word);
             } else if (TermUtil.isWordNatureEquals(term, "wk")) {
                 /**
                  * 自定义关键词
                  */
-                abstractQuery += "wk";
+                abstractQuery += "wk ";
                 abstractMap.put("wk", word);
             } else if (TermUtil.isWordNatureEquals(term, "nt") || TermUtil.isWordNatureEquals(term, "ntu")
                     || TermUtil.isWordNatureEquals(term, "ntc") || TermUtil.isWordNatureEquals(term, "nth")
@@ -167,7 +171,7 @@ public class QuestionServiceDemo {
                 /**
                  * 单位，包含很多单位，所以自定义一个词性
                  */
-                abstractQuery += "unit";
+                abstractQuery += "unit ";
                 abstractMap.put("unit", word);
             } else {
                 abstractQuery += word + " ";
@@ -184,7 +188,7 @@ public class QuestionServiceDemo {
      */
     public Map<String, Integer> loadVocabulary() {
         Map<String, Integer> vocabulary = new HashMap<String, Integer>();
-        int index = 1;
+        int index = 0;
         Set<String> vocabularies = new Vocabulary().getVocabularySet("vocabulary.txt");
         for (String v : vocabularies) {
             vocabulary.put(v, index);
@@ -214,7 +218,10 @@ public class QuestionServiceDemo {
          * HanLP分词，拿分词的结果和词汇表里面的关键特征进行匹配
          * HanLP 分词使用 NLPTokenizer
          */
-        List<Term> terms = NLPTokenizer.segment(sentence);
+        Segment segment = HanLP.newSegment().enableCustomDictionary(true).enableNameRecognize(true);
+
+//        List<Term> terms = NLPTokenizer.segment(sentence);
+        List<Term> terms = segment.seg(sentence);
         for (Term term : terms) {
             String word = term.word;
             /**
@@ -399,13 +406,13 @@ public class QuestionServiceDemo {
                 /**
                  * 未成功检测，期望 1 ，命中 5
                  */
-                questionServiceDemo.analysisQuery("李鹤鹏在哪家单位工作");
-                System.out.println("");
+//                questionServiceDemo.analysisQuery("李鹤鹏在哪家单位工作");
+//                System.out.println("");
                 /**
                  * 成功检测。期望 0 ，命中 0
                  */
-                questionServiceDemo.analysisQuery("周佳琦发表了什么论文");
-                System.out.println("");
+//                questionServiceDemo.analysisQuery("周佳琦发表了什么论文");
+//                System.out.println("");
                 /**
                  * 未成功检测，期望 1 ，命中 5
                  */
@@ -464,7 +471,7 @@ public class QuestionServiceDemo {
                 /**
                  * 未成功检测，期望 4 ，命中 5
                  */
-                questionServiceDemo.analysisQuery("清华有哪些论文");
+                questionServiceDemo.analysisQuery("清华大学有哪些论文");
                 System.out.println("");
                 /**
                  * 未成功检测，期望 6 ，命中 5
