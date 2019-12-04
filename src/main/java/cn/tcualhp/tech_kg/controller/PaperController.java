@@ -197,7 +197,7 @@ public class PaperController {
 
 
     /**
-     *  调用多个方法，检查 paperNode 的每个作者属性，最后返回专家的节点
+     * 调用多个方法，检查 paperNode 的每个作者属性，最后返回专家的节点
      */
     @PostMapping("/getPapersByExpertName")
     public Response getPapersByExpertName(@RequestBody Map<String, String> map) {
@@ -222,7 +222,8 @@ public class PaperController {
     }
 
     /**
-     *  多次调用 “通过专家名获得专家节点”的方法，对其结果进行 set 比较，如果一致则返回，否则返回“空”
+     * 多次调用 “通过专家名获得专家节点”的方法，对其结果进行 set 比较，如果一致则返回，否则返回“空”
+     *
      * @param map
      * @return
      */
@@ -245,6 +246,53 @@ public class PaperController {
 //        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByYear();
         return new Response().success();
 //        return new Response().success(allPaperNodes);
+    }
+
+    /**
+     * 通过 专家 1 姓名 和 专家 2 姓名，查询论文
+     *
+     * @param map
+     * @return paperNode 的 list
+     */
+    @PostMapping("/getPapersByExpertCooperationRelationship")
+    public Response getPapersByExpertCooperationRelationship(@RequestBody Map<String, List<String>> map) {
+        List<String> experts = map.get("expertsNames");
+        System.out.println(experts.get(0) + " : " + experts.get(1));
+        if (StringUtils.isEmpty(experts)) {
+            return new Response().failure(4001, "参数缺失");
+        }
+        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByCooperation(experts.get(0), experts.get(1));
+        return new Response().success(paperNodes);
+    }
+
+    /**
+     * 通过单位名称获取某单位拥有哪些论文/专利
+     * @param map
+     * @return paperNode 的 list
+     */
+    @PostMapping("/getPapersByUnitHavePaper")
+    public Response getPapersByUnitHavePaper(@RequestBody Map<String, String> map) {
+        String unitName = map.get("unitName");
+        if (StringUtils.isEmpty(unitName)) {
+            return new Response().failure(4001, "参数缺失");
+        }
+        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByUnitHavePaper(unitName);
+        return new Response().success(paperNodes);
+    }
+
+    @PostMapping("/getPapersByExpertNameAndKeywords")
+    public Response getPapersByExpertNameAndKeywords(@RequestBody Map<String, String> map) {
+        String expertName = map.get("expertName");
+        String keywords = map.get("keywords");
+        String finalkeywords = ".*" + keywords + ".*";
+        if (StringUtils.isEmpty(expertName)) {
+            return new Response().failure(4001, "参数缺失");
+        }
+        if (StringUtils.isEmpty(finalkeywords)) {
+            return new Response().failure(4001, "参数缺失");
+        }
+        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByExpertNameAndKeywords(expertName,finalkeywords);
+        return new Response().success(paperNodes);
     }
 
 }

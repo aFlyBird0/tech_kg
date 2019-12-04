@@ -31,5 +31,12 @@ public interface ExpertNodeRepo extends Neo4jRepository<ExpertNode, Long> {
     @Query("MATCH (n:Expert) where n.name =~'{0}李.*' RETURN n")
     List<ExpertNode> testCypher(@Param("lastname") String lastname);
 
+    /**
+     * 根据单位名称获取该单位有哪些专家
+     * @param unitName
+     * @return expertNode 的 list
+     */
+    @Query("match (n:Expert)-[r:expert_belong_to_unit]->(b:Unit) where b.name={unitName} return n limit 30")
+    List<ExpertNode> getExpertNodesByUnitName(@Param("unitName") String unitName);
 
 }

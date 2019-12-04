@@ -76,4 +76,14 @@ public class ExpertController {
         return new Response().success(paperNode.getExpertNodes());
     }
 
+    @PostMapping("/getExpertByUnitName")
+    public Response getExpertsByUnitName(@RequestBody Map<String, String> map) {
+        String unitName = map.get("unitName");
+        if (StringUtils.isEmpty(unitName)) {
+            return new Response().failure(4003, "参数缺失");
+        }
+        List<ExpertNode> expertNodes = expertNodeRepo.getExpertNodesByUnitName(unitName);
+        return new Response().success(expertNodes);
+    }
+
 }
