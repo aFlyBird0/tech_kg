@@ -40,12 +40,25 @@ public class QuestionServiceImpl implements QuestionService {
     private JournalNodeRepo journalNodeRepo;
 
     /**
-     * TODO
-     * 重构，将 switch 分支中的语句封装为方法
+     * 对 第一个 分类的问题的答案获取
+     * @param expertName String 专家姓名
+     * @return
      */
-    public void getAnswerOfModelOne() {
-
-    }
+//    public List<PaperNode> getAnswerOfModelOne(String expertName) {
+//        List<ExpertNode> expertNodes = expertNodeRepo.getExpertNodesByName(expertName);
+//        List<PaperNode> paperNodes = new ArrayList<>();
+//        if (expertNodes.size() < 1) {
+//            return paperNodes;
+//        } else {
+//            ExpertNode expertNode = expertNodes.get(0);
+//        }
+//        paperNodes.add(expertNode.getPaperNodes());
+//        /**
+//         * 这里先简单处理一下
+//         */
+//        answer = paperNodes.toString();
+//        return paperNodes;
+//    }
 
     @Override
     public String magicAnswer(String question) {
@@ -136,7 +149,6 @@ public class QuestionServiceImpl implements QuestionService {
                 /**
                  * 某单位的论文/专利有哪些
                  */
-//                List<PaperNode> paperNodes1 = paperNodeRepo.getPaperNodeByUnitHavePaper(reStrings.get(0));
                 answer = paperNodeRepo.getPaperNodeByUnitHavePaper(reStrings.get(0)).toString();
                 break;
             case 5:
