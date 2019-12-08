@@ -84,6 +84,16 @@ public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
 
     List<PaperNode> getPaperNodeByFourthAuthor(@Param("fourthAuthor") String fourthAuthor);
 
+
+    /**
+     * 通过专家姓名查询专家发表的论文信息
+     * @param expertName 专家姓名
+     * @return paperNode 的 list
+     */
+    @Query("match (n:Expert)-[r:write]->(p:Paper) where n.name={expertName} return p limit 30")
+    List<PaperNode> getPaperNodesByExpertName(@Param("expertName") String expertName);
+
+
     /**
      * 通过 专家 1 姓名 和 专家 2 姓名，查询论文
      *
@@ -96,23 +106,25 @@ public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
 
     /**
      * 通过单位名称获取某单位拥有哪些论文/专利
-     *
+     * 支持模糊查询。参数部分调用时需要修饰。
      * @param unitName 单位名称
      * @return
      */
-    @Query("match(n:Unit)-[r:unit_have_paper]->(b:Paper) where n.name={unitName} return b limit 30")
+    @Query("match(n:Unit)-[r:unit_have_paper]->(b:Paper) where n.name=~{unitName} return b limit 30")
     List<PaperNode> getPaperNodeByUnitHavePaper(@Param("unitName") String unitName);
 
 
     /**
      * 通过专家姓名和论文关键词 keywords 查询论文
      * 对应模板 某专家nr 关于 关键字wk 的论文有哪些 ？
+     * 支持关键字模糊查询，需要使用时对关键字进修修饰
      *
-     * @param expertName 专家名
-     * @param keywords   关键字
-     * @return
+     * @param expertName 专家名 ，支持模糊查询。使用时，需要进行修饰，将 expertName 变为 .*expertName.* 即可简单模糊查询
+     * @param keywords   关键字 ，支持模糊查询。使用时，需要进行修饰，将 keywords 变为 .*keywords.* 即可简单模糊查询
+     *                   使用 实例见 PaperController.java 中的 public Response getPapersByExpertNameAndKeywords() 的查询
+     * @return paperNode 的 list
      */
-    @Query("match (e:Expert)-[r:write]->(p:Paper) where p.keywords=~{keywords} and e.name={expertName} return p limit 30")
-    List<PaperNode> getPaperNodeByExpertNameAndKeywords(@Param("expertName") String expertName, @Param("keywords") String keywords);
+    @Query("match (e:Expert)-[r:write]->(p:Paper) where p.keywords=~{keywords} and e.name=~{expertName} return p limit 30")
+    List<PaperNode> getPaperNodeByExpertNameAndKeywords(@Param("keywords") String keywords, @Param("expertName") String expertName);
 
 }

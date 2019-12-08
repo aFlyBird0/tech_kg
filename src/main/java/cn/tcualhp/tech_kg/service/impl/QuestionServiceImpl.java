@@ -143,13 +143,13 @@ public class QuestionServiceImpl implements QuestionService {
                 /**
                  * 某单位 有哪些专家
                  */
-                answer = expertNodeRepo.getExpertNodesByUnitName(reStrings.get(0)).toString();
+                answer = expertNodeRepo.getExpertNodesByUnitNameContains(reStrings.get(0)).toString();
                 break;
             case 6:
                 /**
                  * 某专家nr 关于 关键字wk 的论文有哪些 ？
                  */
-                answer = paperNodeRepo.getPaperNodeByCooperation(reStrings.get(0),reStrings.get(1)).toString();
+                answer = paperNodeRepo.getPaperNodeByExpertNameAndKeywords(reStrings.get(0),reStrings.get(1)).toString();
                 break;
             default:
                 break;

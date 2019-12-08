@@ -7,10 +7,7 @@ import cn.tcualhp.tech_kg.neo4jRepo.ExpertNodeRepo;
 import cn.tcualhp.tech_kg.neo4jRepo.PaperNodeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -21,6 +18,7 @@ import java.util.Map;
  * @date 2019-10-31 21:27
  **/
 @RestController
+//@CrossOrigin(origins = "http://localhost:9000")
 @RequestMapping(value = "/expert")
 public class ExpertController {
 
@@ -76,13 +74,42 @@ public class ExpertController {
         return new Response().success(paperNode.getExpertNodes());
     }
 
+    /**
+     * 通过单位名称获取专家信息
+     * @param map
+     * @return List expertNode 返回专家信息
+     */
     @PostMapping("/getExpertByUnitName")
     public Response getExpertsByUnitName(@RequestBody Map<String, String> map) {
         String unitName = map.get("unitName");
+        StringBuffer finalUnitName = new StringBuffer();
         if (StringUtils.isEmpty(unitName)) {
             return new Response().failure(4003, "参数缺失");
         }
-        List<ExpertNode> expertNodes = expertNodeRepo.getExpertNodesByUnitName(unitName);
+        finalUnitName.append(".*");
+        finalUnitName.append(unitName);
+        finalUnitName.append(".*");
+        List<ExpertNode> expertNodes = expertNodeRepo.getExpertNodesByUnitNameContains(finalUnitName.toString());
+        return new Response().success(expertNodes);
+    }
+
+    /**
+     * 通过给定论文所属的领域，查询专家信息
+     * 支持模糊查询。使用时需要对 areaCode 的参数进行修改，修改为 .*areaCode.*
+     * @param map
+     * @return List expertNode 返回专家的 node 节点
+     */
+    @PostMapping("/getExpertByAreaCode")
+    public Response getExpertsByAreaCode(@RequestBody Map<String, String> map) {
+        String areaCode = map.get("areaCode");
+        StringBuffer finalAreaCode = new StringBuffer();
+        if (StringUtils.isEmpty(areaCode)) {
+            return new Response().failure(4003, "参数缺失");
+        }
+        finalAreaCode.append(".*");
+        finalAreaCode.append(areaCode);
+        finalAreaCode.append(".*");
+        List<ExpertNode> expertNodes = expertNodeRepo.getExpertNodesByAreaCodeContains(finalAreaCode.toString());
         return new Response().success(expertNodes);
     }
 
