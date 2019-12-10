@@ -39,6 +39,27 @@ public class QuestionServiceImpl implements QuestionService {
     @Autowired
     private JournalNodeRepo journalNodeRepo;
 
+    /**
+     * 对 第一个 分类的问题的答案获取
+     * @param expertName String 专家姓名
+     * @return
+     */
+//    public List<PaperNode> getAnswerOfModelOne(String expertName) {
+//        List<ExpertNode> expertNodes = expertNodeRepo.getExpertNodesByName(expertName);
+//        List<PaperNode> paperNodes = new ArrayList<>();
+//        if (expertNodes.size() < 1) {
+//            return paperNodes;
+//        } else {
+//            ExpertNode expertNode = expertNodes.get(0);
+//        }
+//        paperNodes.add(expertNode.getPaperNodes());
+//        /**
+//         * 这里先简单处理一下
+//         */
+//        answer = paperNodes.toString();
+//        return paperNodes;
+//    }
+
     @Override
     public String magicAnswer(String question) {
         ArrayList<String> reStrings = null;
@@ -111,18 +132,16 @@ public class QuestionServiceImpl implements QuestionService {
                  * 这里最好把case都封装成函数，现在太乱了
                  * 比如所有的case的变量不能重复定义，很坑
                  * 这里是 2 nr n2r 合作论文
+                 *
                  */
-                expertName = reStrings.get(1);
-                expertName2 = reStrings.get(2);
-
-                answer = "service待写";
+                answer = paperNodeRepo.getPaperNodeByCooperation(reStrings.get(1),reStrings.get(2)).toString();
                 break;
             case 3:
                 /**
                  * 抽象问题模板：m年发表的某关键词的论文/专利有哪些
                  *
                  */
-                Integer year = Integer.parseInt(reStrings.get(0).replace("年",""));
+                Integer year = Integer.parseInt(reStrings.get(0).replace("年", ""));
                 List<PaperNode> paperNode = paperNodeRepo.getPaperNodeByYear(year);
                 answer = paperNode.toString();
                 break;
@@ -130,26 +149,28 @@ public class QuestionServiceImpl implements QuestionService {
                 /**
                  * 某单位的论文/专利有哪些
                  */
-//                List<PaperNode> paperNodes1 = paperNodeRepo.getPaperNodeByUnitName();
-                answer = "待写";
+                answer = paperNodeRepo.getPaperNodeByUnitHavePaper(reStrings.get(0)).toString();
                 break;
             case 5:
                 /**
                  * 某单位 有哪些专家
                  */
-                answer = "待写";
+                answer = expertNodeRepo.getExpertNodesByUnitNameContains(reStrings.get(0)).toString();
                 break;
             case 6:
                 /**
                  * 某专家nr 关于 关键字wk 的论文有哪些 ？
                  */
-                answer = "待写";
+                answer = paperNodeRepo.getPaperNodeByExpertNameAndKeywords(reStrings.get(0),reStrings.get(1)).toString();
                 break;
             default:
                 break;
         }
 
         System.out.println(answer);
+        /**
+         * 以下的 "\\N" 意思不明，待修补
+         */
         if (answer != null && !answer.equals("") && !answer.equals("\\N")) {
             return answer;
         } else {

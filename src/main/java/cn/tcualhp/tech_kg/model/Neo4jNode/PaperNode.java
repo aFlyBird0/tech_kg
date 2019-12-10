@@ -115,6 +115,25 @@ public class PaperNode {
     private String fourthAuthorCode;
 
     /**
+     * 全部的论文作者
+     */
+    @Property(name = "authors")
+    private String authors;
+
+    /**
+     * 论文发表的期刊名
+     */
+    @Property(name = "journal_name")
+    private String journalName;
+
+    @Property(name = "classification")
+    private String classification;
+
+    @Property(name = "unit")
+    private String unit;
+
+
+    /**
      * 发表入方向，即作者
      *
      * @param null
