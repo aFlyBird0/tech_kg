@@ -2,6 +2,13 @@
   "comments": "HanLP 对数字的分词词性为 数词，标记为 m",
   "questionDescription": "m年发表的某关键词的论文/专利有哪些",
   "questionType": 3,
+  "filter":
+    {
+      "mustContain":["m", "wk"]
+    ,
+      "canNotContain":["unit", "n2r"]
+    }
+  ,
   "questions": [
     {
       "id": 1,

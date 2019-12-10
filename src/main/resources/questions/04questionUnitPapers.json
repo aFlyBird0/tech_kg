@@ -2,6 +2,13 @@
   "comments": "HanLP 的机构等单位的词性为 ntu ",
   "questionDescription": "某单位的论文/专利有哪些",
   "questionType": 4,
+  "filter":
+    {
+      "mustContain":["unit"]
+    ,
+      "canNotContain":["n2r", "n2r"]
+    }
+  ,
   "questions": [
     {
       "id": 1,

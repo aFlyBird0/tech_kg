@@ -2,6 +2,13 @@
   "comments": "HanLP 的人名的 词性标注为 nr ",
   "questionDescription": "某人任职与哪个单位",
   "questionType": 1,
+  "filter":
+    {
+      "mustContain":["nr"]
+    ,
+      "canNotContain":["n2r"]
+    }
+  ,
   "questions": [
     {
       "id": 1,

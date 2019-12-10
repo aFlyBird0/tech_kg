@@ -3,11 +3,17 @@ package cn.tcualhp.tech_kg.process;
 import cn.tcualhp.tech_kg.utils.LoadJsonUtil;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import org.apache.hadoop.util.hash.Hash;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author jerry
@@ -24,6 +30,11 @@ public class QuestionList {
     private int questionType;
     private String questionDescription;
     private List<Question> questions;
+    /**
+     * 过滤器，定义必须包含、不能包含等词性
+     * 用于提高分类准确性
+     */
+    private HashMap<String, List<String>> filter;
 
     public QuestionList(String fileName) {
         this.fileName = fileName;
@@ -63,6 +74,14 @@ public class QuestionList {
          */
         this.questionType = Integer.parseInt(jsonObject.get("questionType").toString());
 
+        this.filter = new HashMap<>();
+        JSONObject filterMap = jsonObject.getJSONObject("filter");
+        Set<String> filterKeys = filterMap.keySet();
+        for (String key: filterKeys){
+            List<String> filterOneList =
+                    JSONArray.parseArray(filterMap.getJSONArray(key).toString(), String.class);
+            this.filter.put(key, filterOneList);
+        }
     }
 
     public static void main(String[] args) throws IOException {
