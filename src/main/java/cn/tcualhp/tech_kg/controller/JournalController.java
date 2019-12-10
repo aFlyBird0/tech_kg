@@ -5,10 +5,7 @@ import cn.tcualhp.tech_kg.model.Neo4jNode.JournalNode;
 import cn.tcualhp.tech_kg.neo4jRepo.JournalNodeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +17,7 @@ import java.util.Map;
  * @description 期刊 controller
  * @create 2019/11/15 11:13
  **/
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/journal")
 public class JournalController {

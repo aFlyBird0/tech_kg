@@ -7,10 +7,7 @@ import cn.tcualhp.tech_kg.neo4jRepo.ExpertNodeRepo;
 import cn.tcualhp.tech_kg.neo4jRepo.PaperNodeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -20,6 +17,7 @@ import java.util.Map;
  * @description 查询专家
  * @date 2019-10-31 21:27
  **/
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/expert")
 public class ExpertController {
