@@ -570,6 +570,9 @@ public class QuestionServiceDemo {
                  */
                 questionServiceDemo.analysisQuery("李鹤鹏发表过的关于知识图谱的论文有哪些");
                 System.out.println("");
+
+                questionServiceDemo.analysisQuery("李鹤鹏发表过的关于产科的论文有哪些");
+                System.out.println("");
             } catch (Exception e) {
                 e.printStackTrace();
             }
