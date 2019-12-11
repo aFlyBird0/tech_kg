@@ -18,6 +18,7 @@ import java.util.Map;
  * @description 查询专家
  * @date 2019-10-31 21:27
  **/
+@CrossOrigin("*")
 @RestController
 //@CrossOrigin(origins = "http://localhost:9000")
 @RequestMapping(value = "/expert")

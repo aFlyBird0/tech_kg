@@ -9,10 +9,7 @@ import com.hankcs.hanlp.seg.common.Term;
 import com.hankcs.hanlp.tokenizer.StandardTokenizer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
@@ -21,6 +18,7 @@ import java.util.*;
  * @description 论文查询
  * @date 2019-11-02 21:43
  **/
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/paper")
 public class PaperController {

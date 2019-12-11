@@ -64,6 +64,11 @@ public class Question2ModelString {
      */
     int modelIndex = 0;
 
+    /**
+     * 问题列表
+     */
+    List<QuestionList> questionLists;
+
     public Question2ModelString() throws Exception {
         questionsPattern = loadQuestionsPattern();
         vocabulary = loadVocabulary();
@@ -86,7 +91,8 @@ public class Question2ModelString {
         /**
          * 将抽象的句子与spark训练集中的模板进行匹配，拿到句子对应的模板
          */
-        String strPatt = queryClassify(abstr);
+//        String strPatt = queryClassify(abstr);
+        String strPatt = queryClassifyWithFilter(abstr);
         System.out.println("句子套用模板结果：" + strPatt);
 
         /**
@@ -233,6 +239,103 @@ public class Question2ModelString {
     }
 
     /**
+     * 通过问题定义的词性过滤器对贝叶斯分类成果进行惩罚
+     * 如李鹤鹏发表了什么论文 这个问题
+     * 会对nr n2r 论文这个分类得分进行惩罚
+     * 因为李鹤鹏发表了什么论文这个问题
+     * 抽象结果是 nr 论文， 不包含n2r
+     * 由此可以区分出nr 论文与 nr n2r 论文这两个论文
+     * 解决了此前分类的时候忽略重要关键词的尴尬
+     * @param score_ori
+     * @return double[]
+     * @author lihepeng
+     * @description //TODO
+     * @date 11:20 2019/12/11
+     **/
+    double[] dealArrayByFilter(double[] score_ori){
+        double[] scores = score_ori.clone();
+        /**
+         * 遍历每个分类结果的分数
+         */
+        for (int i=0; i<scores.length; i++){
+            /**
+             * 遍历每个问题的过滤器
+             */
+            for (QuestionList questionList: questionLists){
+                HashMap<String,List<String>> filter = questionList.getFilter();
+                List<String> mustContain = filter.get("mustContain");
+                List<String> canNotContain = filter.get("canNotContain");
+                // 惩罚未包含该包含的元素
+                for (String key: mustContain){
+                    if (!abstractMap.containsKey(key)){
+                        scores[questionList.getQuestionType()] *= 0.6;
+                    }
+                }
+                // 惩罚包含了不该包含的元素
+                for (String key: abstractMap.keySet()){
+                    if (canNotContain.contains(key)){
+                        scores[questionList.getQuestionType()] *= 0.6;
+                    }
+                }
+            }
+        }
+        return scores;
+    }
+
+    /**
+     * 求一个double数组中最大数的下标
+     * @param nums
+     * @return int
+     * @author lihepeng
+     * @description //TODO
+     * @date 0:10 2019/12/11
+     **/
+    int findMaxNumIndex(double[] nums){
+        if (nums.length < 1){
+            return -1;
+        }
+        int i;
+        double max = 0;
+        int max_index = 0;
+        for(i=0; i<nums.length; i++){
+            if (nums[i] > max){
+                max = nums[i];
+                max_index = i;
+            }
+        }
+        return max_index;
+    }
+
+    /**
+     *
+     * @param sentence
+     * @return java.lang.String
+     * @author lihepeng
+     * @description //TODO
+     * @date 23:56 2019/12/10
+     **/
+    public String queryClassifyWithFilter(String sentence) throws Exception {
+
+        double[] testArray = sentenceToArrays(sentence);
+        Vector v = Vectors.dense(testArray);
+
+        /**
+         * 对数据进行预测predict
+         * 句子模板在 spark贝叶斯分类器中的索引【位置】
+         * 根据词汇使用的频率推断出句子对应哪一个模板
+         */
+//        double index = nbModel.predict(v);
+//        modelIndex = (int) index;
+//        System.out.println("the model index is " + index);
+        Vector vRes = nbModel.predictProbabilities(v);
+        double[] vResArray = vRes.toArray();
+        double[] vResArrayWithFilter = dealArrayByFilter(vResArray);
+        int modelIndex = findMaxNumIndex(vResArrayWithFilter);
+        System.out.println("分类结果序号：" + modelIndex);
+        return questionsPattern.get((double)modelIndex);
+    }
+
+    /**
      * 加载问题模板 == 分类器标签
      *
      * @return
@@ -308,10 +411,13 @@ public class Question2ModelString {
         File questionDir = new File("src/main/resources/questions");
         String[] questionFileNames = questionDir.list();
 
+        questionLists = new ArrayList<>();
+
         //加载所有问题模型
         for (String questionFileName : questionFileNames
         ) {
             QuestionList questionList = new QuestionList(questionRootDir + questionFileName);
+            questionLists.add(questionList);
             List<Question> questions = questionList.getQuestions();
             //将问题列表转换成向量
             for (Question q : questions) {

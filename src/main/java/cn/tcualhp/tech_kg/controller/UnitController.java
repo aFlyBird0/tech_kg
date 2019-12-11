@@ -5,10 +5,7 @@ import cn.tcualhp.tech_kg.model.Neo4jNode.UnitNode;
 import cn.tcualhp.tech_kg.neo4jRepo.UnitNodeRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -20,7 +17,7 @@ import java.util.Map;
  * @description 通过单位查询相关信息
  * @create 2019/11/28 14:54
  **/
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping(value = "/unit")
 public class UnitController {

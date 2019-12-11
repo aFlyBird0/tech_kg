@@ -2,6 +2,13 @@
   "comments": "HanLP 的人名的 词性标注为 nr ",
   "questionDescription": "某人发表了哪些论文",
   "questionType": 0,
+  "filter":
+    {
+      "mustContain":["nr"]
+    ,
+      "canNotContain":["unit", "n2r"]
+    }
+  ,
   "questions": [
     {
       "id": 1,

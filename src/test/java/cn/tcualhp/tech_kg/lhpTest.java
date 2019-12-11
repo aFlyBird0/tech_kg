@@ -32,17 +32,17 @@ public class lhpTest extends TechKgApplicationTests{
         }
     }
 
-    @Test
-    void getPapersByPaperName(){
-        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByKeywordsContains("基于");
-        for (PaperNode paperNode: paperNodes
-             ) {
-            System.out.println(paperNode);
-        }
-        Set<ExpertNode> expertNodes = paperNodes.get(0).getExpertNodes();
-        for (ExpertNode expertNode: expertNodes
-             ) {
-            System.out.println(expertNode);
-        }
-    }
+//    @Test
+//    void getPapersByPaperName(){
+//        List<PaperNode> paperNodes = paperNodeRepo.getPaperNodeByKeywordsContains("基于");
+//        for (PaperNode paperNode: paperNodes
+//             ) {
+//            System.out.println(paperNode);
+//        }
+//        Set<ExpertNode> expertNodes = paperNodes.get(0).getExpertNodes();
+//        for (ExpertNode expertNode: expertNodes
+//             ) {
+//            System.out.println(expertNode);
+//        }
+//    }
 }

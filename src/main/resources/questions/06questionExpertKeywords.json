@@ -2,6 +2,13 @@
   "comments": "HanLP 的 人名的词性为 nr ，wk 为关键词（一般为名词居多，然后是动词），用户自定义词性",
   "questionDescription": "nr关于wk的论文有哪些",
   "questionType": 6,
+  "filter":
+    {
+      "mustContain":["nr", "wk"]
+    ,
+      "canNotContain":["unit", "n2r"]
+    }
+  ,
   "questions": [
     {
       "id": 1,
