@@ -98,9 +98,6 @@ public class QuestionServiceDemo {
          */
 //        String strPatt = queryClassify(abstr);
         String strPatt = queryClassifyWithFilter(abstr);
-        /**
-         * nr 论文
-         */
         System.out.println("句子套用模板结果：" + strPatt);
 
         /**
@@ -267,6 +264,20 @@ public class QuestionServiceDemo {
         return questionsPattern.get(index);
     }
 
+    /**
+     * 通过问题定义的词性过滤器对贝叶斯分类成果进行惩罚
+     * 如李鹤鹏发表了什么论文 这个问题
+     * 会对nr n2r 论文这个分类得分进行惩罚
+     * 因为李鹤鹏发表了什么论文这个问题
+     * 抽象结果是 nr 论文， 不包含n2r
+     * 由此可以区分出nr 论文与 nr n2r 论文这两个论文
+     * 解决了此前分类的时候忽略重要关键词的尴尬
+     * @param score_ori
+     * @return double[]
+     * @author lihepeng
+     * @description //TODO
+     * @date 11:20 2019/12/11
+     **/
     double[] dealArrayByFilter(double[] score_ori){
         double[] scores = score_ori.clone();
         /**
