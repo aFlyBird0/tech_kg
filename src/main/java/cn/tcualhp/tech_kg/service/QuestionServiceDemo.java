@@ -283,13 +283,13 @@ public class QuestionServiceDemo {
                 // 惩罚未包含该包含的元素
                 for (String key: mustContain){
                     if (!abstractMap.containsKey(key)){
-                        scores[questionList.getQuestionType()] *= 0.2;
+                        scores[questionList.getQuestionType()] *= 0.6;
                     }
                 }
                 // 惩罚包含了不该包含的元素
                 for (String key: abstractMap.keySet()){
                     if (canNotContain.contains(key)){
-                        scores[questionList.getQuestionType()] *= 0.2;
+                        scores[questionList.getQuestionType()] *= 0.6;
                     }
                 }
             }
@@ -346,6 +346,7 @@ public class QuestionServiceDemo {
         double[] vResArray = vRes.toArray();
         double[] vResArrayWithFilter = dealArrayByFilter(vResArray);
         int modelIndex = findMaxNumIndex(vResArrayWithFilter);
+        System.out.println("分类结果序号：" + modelIndex);
         return questionsPattern.get((double)modelIndex);
     }
 
