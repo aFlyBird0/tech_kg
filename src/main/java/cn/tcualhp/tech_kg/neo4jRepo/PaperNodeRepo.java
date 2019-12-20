@@ -87,6 +87,7 @@ public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
 
     /**
      * 通过专家姓名查询专家发表的论文信息
+     *
      * @param expertName 专家姓名
      * @return paperNode 的 list
      */
@@ -107,6 +108,7 @@ public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
     /**
      * 通过单位名称获取某单位拥有哪些论文/专利
      * 支持模糊查询。参数部分调用时需要修饰。
+     *
      * @param unitName 单位名称
      * @return
      */
@@ -126,5 +128,15 @@ public interface PaperNodeRepo extends Neo4jRepository<PaperNode, Long> {
      */
     @Query("match (e:Expert)-[r:write]->(p:Paper) where p.keywords=~{keywords} and e.name=~{expertName} return p limit 30")
     List<PaperNode> getPaperNodeByExpertNameAndKeywords(@Param("keywords") String keywords, @Param("expertName") String expertName);
+
+    /**
+     * 通过论文的关键词和发表年份查询论文
+     *
+     * @param keywords 关键词，支持模糊查询。使用时需要进行修饰。
+     * @param year     论文发表年份
+     * @return
+     */
+    @Query("match (p:Paper) where p.keywords=~{keywords} and p.year={year} return p limit 30")
+    List<PaperNode> getPaperNodeByYearAndKeywords(@Param("year") int year, @Param("keywords") String keywords);
 
 }

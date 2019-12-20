@@ -10,6 +10,10 @@ package cn.tcualhp.tech_kg.utils;
 
 public class ConsoleUtil {
 
+    /**
+     * 打印原始问句
+     * @param queryString 用户输入的问题语句
+     */
     public static void printOriginSentence(String queryString) {
         System.out.println("原始句子：" + queryString);
         System.out.println("========HanLP开始分词========");

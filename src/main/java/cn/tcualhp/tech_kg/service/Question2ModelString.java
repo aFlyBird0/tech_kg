@@ -62,7 +62,7 @@ public class Question2ModelString {
     /**
      * 分类模板索引
      */
-    int modelIndex = 0;
+    int modelIndex;
 
     /**
      * 问题列表
@@ -330,7 +330,7 @@ public class Question2ModelString {
         Vector vRes = nbModel.predictProbabilities(v);
         double[] vResArray = vRes.toArray();
         double[] vResArrayWithFilter = dealArrayByFilter(vResArray);
-        int modelIndex = findMaxNumIndex(vResArrayWithFilter);
+        modelIndex = findMaxNumIndex(vResArrayWithFilter);
         System.out.println("分类结果序号：" + modelIndex);
         return questionsPattern.get((double)modelIndex);
     }
