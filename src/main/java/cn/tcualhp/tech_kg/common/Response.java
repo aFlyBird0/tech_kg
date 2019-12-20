@@ -11,30 +11,30 @@ public class Response {
     private Object data;
 
     public Response success() {
-        this.meta = new Meta(1,"ok");
+        this.meta = new Meta(1, "ok");
         return this;
     }
 
     public Response success(Object data) {
-        this.meta = new Meta(1,"ok");
+        this.meta = new Meta(1, "ok");
         this.data = data;
         return this;
     }
 
-    public Response success(int result,Object data) {
-        this.meta = new Meta(result,"ok");
+    public Response success(int result, Object data) {
+        this.meta = new Meta(result, "ok");
         this.data = data;
         return this;
     }
 
     public Response success(int result, Object data, String message) {
-        this.meta = new Meta(result,message);
+        this.meta = new Meta(result, message);
         this.data = data;
         return this;
     }
 
     public Response failure() {
-        this.meta = new Meta(0,"error");
+        this.meta = new Meta(0, "error");
         return this;
     }
 
@@ -43,7 +43,7 @@ public class Response {
         return this;
     }
 
-    public Response failure(int result,String message) {
+    public Response failure(int result, String message) {
         this.meta = new Meta(result, message);
         return this;
     }

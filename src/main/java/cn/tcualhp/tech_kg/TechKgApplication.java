@@ -11,5 +11,4 @@ public class TechKgApplication {
     public static void main(String[] args) {
         SpringApplication.run(TechKgApplication.class, args);
     }
-
 }

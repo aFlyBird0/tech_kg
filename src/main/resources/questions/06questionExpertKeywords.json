@@ -1,0 +1,62 @@
+{
+  "comments": "HanLP 的 人名的词性为 nr ，wk 为关键词（一般为名词居多，然后是动词），用户自定义词性",
+  "questionDescription": "nr关于wk的论文有哪些",
+  "questionType": 6,
+  "filter":
+    {
+      "mustContain":["nr", "wk"]
+    ,
+      "canNotContain":["unit", "n2r"]
+    }
+  ,
+  "questions": [
+    {
+      "id": 1,
+      "value": "nr关于wk的论文有哪些"
+    },
+    {
+      "id": 2,
+      "value": "nr关于wk的论文有"
+    },
+    {
+      "id": 3,
+      "value": "nr发表的wk的论文有哪些"
+    },
+    {
+      "id": 4,
+      "value": "nr关于wk的论文有"
+    },
+    {
+      "id": 5,
+      "value": "nr关于wk的专利有哪些"
+    },
+    {
+      "id": 6,
+      "value": "nr关于wk的专利有"
+    },
+    {
+      "id": 7,
+      "value": "nr发表的wk的专利有哪些"
+    },
+    {
+      "id": 8,
+      "value": "nr关于wk的专利有"
+    },
+    {
+      "id": 9,
+      "value": "nr的wk的专利有哪些"
+    },
+    {
+      "id": 10,
+      "value": "nr的wk的专利有"
+    },
+    {
+      "id": 11,
+      "value": "nr的wk的专利有哪些"
+    },
+    {
+      "id": 12,
+      "value": "nr的wk的专利有"
+    }
+  ]
+}
